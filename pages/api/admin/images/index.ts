@@ -1,6 +1,7 @@
 import { NextApiHandler } from 'next'
 import Image from '../../../../db/models/Image'
 import connect from '../../../../db/connect'
+import { removeImageFromS3 } from '../../../../aws/helpers'
 
 const handler: NextApiHandler = async (req, res) => {
   await connect()
@@ -30,10 +31,16 @@ const handler: NextApiHandler = async (req, res) => {
       break
     case 'DELETE':
       try {
-        const success = await Image.deleteOne({ _id: req.body.id })
-        console.log(success.acknowledged)
-        if (success.acknowledged) {
-          res.status(200).json({ message: 'Image successfully deleted' })
+        const removedFromDB = await Image.deleteOne({ title: req.body.title })
+
+        if (removedFromDB.acknowledged) {
+          const removedFromS3 = await removeImageFromS3(req.body.title)
+
+          if (removedFromS3) {
+            res.status(200).json({ message: 'Image successfully deleted' })
+          } else {
+            res.status(500).json({ message: 'Could not delete image' })
+          }
         } else {
           throw new Error()
         }
@@ -42,6 +49,7 @@ const handler: NextApiHandler = async (req, res) => {
 
         res.status(500).json({ message: 'Could not delete image' })
       }
+      break
   }
 }
 

@@ -38,6 +38,24 @@ export const uploadFileToS3 = async (file: FileData) => {
   }
 }
 
+export const removeImageFromS3 = async (title: string) => {
+  let key = `images/${title}`
+
+  if (process.env.NODE_ENV === 'development') {
+    key = `test/images/${title}`
+  }
+
+  const params = {
+    Bucket: S3_BUCKET!,
+    Key: key,
+  }
+
+  await s3.deleteObject(params).promise()
+  await removeThumbFromS3(title)
+
+  return true
+}
+
 export const getFileType = (mimetype: string) => {
   if (mimetype.match(/^video/)) {
     return 'videos'
@@ -71,4 +89,21 @@ export const createAndUploadThumbnailToS3 = async (file: FileData) => {
   const uploadedThumbnail = await s3.upload(thumbnailParams).promise()
 
   return uploadedThumbnail
+}
+
+const removeThumbFromS3 = async (title: string) => {
+  let key = `images/${title.replace(/\.[^/.]+$/, '')}-thumb.png`
+
+  if (process.env.NODE_ENV === 'development') {
+    key = `test/images/${title.replace(/\.[^/.]+$/, '')}-thumb.png`
+  }
+
+  const params = {
+    Bucket: S3_BUCKET!,
+    Key: key,
+  }
+
+  await s3.deleteObject(params).promise()
+
+  return
 }

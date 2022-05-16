@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import axios, { AxiosResponse } from 'axios'
 import * as API from './api'
 import { FCProps, IImage, IProject, IVideo } from '../../globalTypes'
 import { AdminContextInterface, EmptyProjectPayload } from './types'
@@ -15,14 +14,9 @@ const AdminContextProvider = (props: FCProps) => {
 
   useEffect(() => {
     try {
-      // write as API function
-      axios
-        .get('/api/admin/projects')
-        .then((response: AxiosResponse<IProject[]>) => {
-          const fetchedProjects = response.data
-
-          setProjects(fetchedProjects)
-        })
+      API.getProjectsFromDB().then((fetchedProjects) => {
+        if (fetchedProjects) setProjects(fetchedProjects)
+      })
     } catch (error) {
       console.log(error)
     }
@@ -30,14 +24,9 @@ const AdminContextProvider = (props: FCProps) => {
 
   useEffect(() => {
     try {
-      // write as API function
-      axios
-        .get('/api/admin/images')
-        .then((response: AxiosResponse<IImage[]>) => {
-          const fetchedImages = response.data
-
-          setImages(fetchedImages)
-        })
+      API.getImagesFromDB().then((fetchedImages) => {
+        if (fetchedImages) setImages(fetchedImages)
+      })
     } catch (error) {
       console.log(error)
     }
@@ -45,25 +34,41 @@ const AdminContextProvider = (props: FCProps) => {
 
   const createEmptyProject = async (payload: EmptyProjectPayload) => {
     try {
-      const savedProject = await API.saveProjectToDatabase(payload)
+      const savedProject = await API.saveProjectToDB(payload)
       setProjects((prev) => [...prev, savedProject])
     } catch (error) {
       console.log(error)
     }
   }
 
-  const deleteImage = async (id: string): Promise<boolean> => {
-    try {
-      const success = await API.deleteImageFromDB(id)
-      console.log(success)
+  const uploadFiles = async (
+    inputElement: React.RefObject<HTMLInputElement>
+  ) => {
+    if (!inputElement.current) return false
+    const data = new FormData()
+    const filesLength = inputElement.current.files!.length
 
-      if (success) {
-        return true
-      } else {
-        return false
-      }
+    for (let i = 0; i < filesLength; i++) {
+      data.append('data', inputElement.current.files![i])
+    }
+
+    const response = await API.uploadFiles(data)
+
+    console.log(response)
+
+    // kolla om video eller image
+    setImages((prev) => [...prev, ...response.files])
+
+    return true
+  }
+
+  const deleteImage = async (title: string): Promise<boolean> => {
+    try {
+      await API.deleteImage(title)
+      setImages((prev) => [...prev.filter((image) => image.title !== title)])
+
+      return true
     } catch (error) {
-      console.log(error)
       return false
     }
   }
@@ -72,6 +77,7 @@ const AdminContextProvider = (props: FCProps) => {
     images,
     videos,
     projects,
+    uploadFiles,
     createEmptyProject,
     deleteImage,
     setImages,

@@ -4,8 +4,11 @@ export interface AdminContextInterface {
   images: IImage[]
   videos: IVideo[]
   projects: IProject[]
+  uploadFiles: (
+    inputElement: React.RefObject<HTMLInputElement>
+  ) => Promise<boolean>
   createEmptyProject: (payload: EmptyProjectPayload) => Promise<void>
-  deleteImage: (id: string) => Promise<boolean>
+  deleteImage: (title: string) => Promise<boolean>
   setImages: React.Dispatch<React.SetStateAction<IImage[]>>
   setVideos: React.Dispatch<React.SetStateAction<IVideo[]>>
 }

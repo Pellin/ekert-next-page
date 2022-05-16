@@ -1,5 +1,5 @@
+import React, { useContext } from 'react'
 import Image from 'next/image'
-import React, { SyntheticEvent, useContext } from 'react'
 import { AdminContext } from '../../../../contexts/admin/AdminContext'
 import { IImage } from '../../../../globalTypes'
 import styles from './ImageList.module.scss'
@@ -17,8 +17,8 @@ const ImageList = ({
 }: ImageListProps) => {
   const { deleteImage } = useContext(AdminContext)!
 
-  const handleDeleteImage = async (id: string) => {
-    const success = await deleteImage(id)
+  const handleDeleteImage = async (title: string) => {
+    const success = await deleteImage(title)
 
     if (success) {
       console.log('YEAH')
@@ -52,7 +52,7 @@ const ImageList = ({
           </div>
           <div className={styles.imageOptions}>
             <div
-              onClick={() => handleDeleteImage(image._id!)}
+              onClick={() => handleDeleteImage(image.title)}
               title="Släng"
               className={styles.iconWrapper}
             >

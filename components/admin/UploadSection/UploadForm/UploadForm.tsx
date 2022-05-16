@@ -1,41 +1,70 @@
 import React, { SyntheticEvent, useContext, useRef, useState } from 'react'
-import axios from 'axios'
 import { AdminContext } from '../../../../contexts/admin/AdminContext'
+import Button from '../../../ui/Button'
 import styles from './UploadForm.module.scss'
 
 const UploadForm = () => {
   const [isUploading, setIsuploading] = useState(false)
-  const { setImages } = useContext(AdminContext)!
+  const [uploadError, setUploadError] = useState(false)
+  const [hasFiles, setHasFiles] = useState(false)
+  const { uploadFiles } = useContext(AdminContext)!
   const inputRef = useRef<HTMLInputElement>(null)
 
-  // lägg i context istället
   const handleUpload = async (e: SyntheticEvent) => {
     e.preventDefault()
     if (!inputRef.current) return
+    setUploadError(false)
     setIsuploading(true)
 
-    const data = new FormData()
-    const filesLength = inputRef.current.files!.length
+    const filesUploaded = await uploadFiles(inputRef)
 
-    for (let i = 0; i < filesLength; i++) {
-      data.append('data', inputRef.current.files![i])
+    if (!filesUploaded) {
+      setUploadError(true)
     }
 
-    const response = await axios.post('/api/admin/upload', data, {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    })
-
-    setImages((prev) => [...prev, ...response.data.files])
     setIsuploading(false)
   }
 
+  const handleClearInput = () => {
+    if (inputRef!.current?.files!.length) {
+      inputRef.current.value = ''
+      setHasFiles(false)
+    }
+  }
+
+  const handleChange = () => {
+    if (inputRef.current) {
+      if (inputRef.current.files?.length) {
+        setHasFiles(true)
+      }
+    }
+  }
+
   return (
-    <form encType="multipart/form-data" onSubmit={handleUpload} method="post">
-      <input ref={inputRef} type="file" multiple />
-      <button>Ladda upp filer</button>
+    <form
+      className={styles.form}
+      encType="multipart/form-data"
+      onSubmit={handleUpload}
+    >
+      <input onChange={handleChange} ref={inputRef} type="file" multiple />
+      <div className={styles.buttons}>
+        <Button
+          icon={{ name: 'trash-icon.png', alt: 'Rensa' }}
+          disabled={!hasFiles}
+          type="button"
+          title="Rensa"
+          text="Rensa"
+          onClick={handleClearInput}
+        />
+        <Button
+          icon={{ name: 'upload-icon.png', alt: 'Ladda upp filer' }}
+          disabled={!hasFiles}
+          title="Ladda upp"
+          text="Ladda upp filer "
+        />
+      </div>
       {isUploading && <p>Laddar upp....</p>}
+      {uploadError && <p>Kunde inte ladda upp filer. Försök igen senare.</p>}
     </form>
   )
 }
