@@ -1,0 +1,44 @@
+@import '../../../styles/variables.scss';
+
+.mainContainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .section {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+
+    .label {
+      background-color: transparent;
+      bottom: 0;
+      cursor: pointer;
+      right: 0;
+      opacity: 0.5;
+      position: absolute;
+      z-index: 10;
+
+      h2 {
+        color: $off-white;
+        font-size: 15rem;
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+    }
+
+    .imageWrapper {
+      width: 100%;
+    }
+  }
+}

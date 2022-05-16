@@ -1,9 +1,9 @@
 import type { NextPage } from 'next'
-import styles from '../styles/Home.module.scss'
+import MainContent from '../components/home/MainContent'
 
-// renders hero with featured video/image, selected projects, customers, footer with contact information
+// renders MainContent with featured video/image, selected projects, customers, footer with contact information
 const Home: NextPage = () => {
-  return <div className={styles.container}>ANDERS EKERT</div>
+  return <MainContent />
 }
 
 export default Home
