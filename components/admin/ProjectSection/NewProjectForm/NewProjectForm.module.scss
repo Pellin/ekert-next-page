@@ -1,0 +1,17 @@
+.formWrapper {
+  .newProjectForm {
+    padding: 1rem 0;
+
+    .formRow {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+    }
+
+    .checkboxRow {
+      align-items: center;
+      display: flex;
+      margin-bottom: 1rem;
+    }
+  }
+}
