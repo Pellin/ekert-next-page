@@ -1,0 +1,44 @@
+.imageGrid {
+  align-self: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 15rem);
+  grid-template-rows: repeat(auto-fill, 18rem);
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  width: 100%;
+
+  li {
+    height: 18rem;
+    width: 15rem;
+
+    .thumbnailWrapper {
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      height: 15rem;
+      width: 15rem;
+      object-fit: contain;
+
+      &:active {
+        z-index: -50;
+      }
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+
+    .imageOptions {
+      height: 3rem;
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 0.5rem;
+
+      .iconWrapper {
+        cursor: pointer;
+        height: 1.6rem;
+        width: 1.6rem;
+      }
+    }
+  }
+}
