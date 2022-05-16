@@ -8,9 +8,9 @@ const handler: NextApiHandler = async (req, res) => {
   switch (req.method) {
     case 'GET':
       try {
-        const projects = await Image.find()
+        const images = await Image.find()
 
-        res.status(200).json(projects)
+        res.status(200).json(images)
       } catch (error) {
         res.status(500).json({ message: 'Could not fetch images' })
       }
