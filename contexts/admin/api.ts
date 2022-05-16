@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { FileData, IImage, IProject } from '../../globalTypes'
+import { IImage, IProject } from '../../globalTypes'
 import { EmptyProjectPayload } from './types'
 
 export const getProjectsFromDB = async () => {
