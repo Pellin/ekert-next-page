@@ -1,0 +1,13 @@
+@import '../../../styles//variables.scss';
+
+.button {
+  background-color: $off-white;
+  border: 1px solid $off-black;
+  cursor: pointer;
+  outline: none;
+  padding: 0.5rem 1rem;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}
