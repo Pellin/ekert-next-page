@@ -28,6 +28,9 @@ const NewProjectForm = () => {
   return (
     <div className={styles.formWrapper}>
       <Button
+        icon={
+          !showForm && { name: 'circle-plus.png', alt: 'Skapa nytt projekt' }
+        }
         title={showForm ? 'Stäng formuläret' : 'Skapa nytt tomt projekt'}
         onClick={() => setShowForm(!showForm)}
         text={showForm ? 'Avbryt' : 'Nytt projekt'}
