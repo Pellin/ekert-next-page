@@ -1,7 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300&family=Roboto:wght@400;700&display=swap');
+@import './variables.scss';
+
 html,
 body {
+  background-color: $off-white;
+  color: $off-black;
+  font-family: 'Roboto', sans-serif;
+  font-size: 62.5%;
+  -ms-overflow-style: none;
   padding: 0;
   margin: 0;
+
+  h1, h2, h3 {
+    font-family: 'Outfit', sans-serif;
+    margin: 0;
+  }
+
+  h1 { 
+    font-size: 3.2rem;
+  }
+
+  h2 {
+    font-size: 2.8rem;
+    margin: 1rem 0;
+  }
+
+  h3 {
+    color: $off-black;
+    font-size: 2.2rem;
+  }
+
+  p {
+    font-size: 1.6rem;
+    margin: 0.5rem 0;
+  }
+
+  label {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  input, textarea {
+    border: none;
+    margin-top: 0.5rem;
+    max-width: 50%;
+    outline: none;
+    padding: 0.5rem;
+  }
+
+  textarea {
+    font-family: 'Roboto', sans-serif;;
+    resize: none;
+  }
 }
 
 * {
