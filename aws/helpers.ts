@@ -8,6 +8,7 @@ export const getSignedVideoUrl = async (key: string) => {
     const url = s3.getSignedUrl('getObject', {
       Bucket: S3_BUCKET!,
       Key: key,
+      Expires: 1800,
     })
 
     return url
