@@ -14,11 +14,11 @@ const VideoList = () => {
             <h3>{video.title}</h3>
             <div className={styles.iconWrapper}>
               <Image
-                title="Redigera"
-                src="/icons/edit-icon.png"
-                alt="Redigera"
-                width={14}
-                height={14}
+                title="Inspektera"
+                src="/icons/info-icon.png"
+                alt="Inspektera"
+                width={16}
+                height={16}
               />
             </div>
           </div>

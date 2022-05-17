@@ -35,13 +35,28 @@ const ImageList = ({
   return (
     <ul className={styles.imageGrid}>
       {images.map((image) => (
-        <li key={image._id}>
+        <li className={styles.imageCard} key={image._id}>
+          <div className={styles.imageHeader}>
+            <p>{image.title}</p>
+            <div
+              onClick={() => handleOpenLightbox(image)}
+              title="Inspektera"
+              className={styles.iconWrapper}
+            >
+              <Image
+                src="/icons/info-icon.png"
+                alt="Delete"
+                width={20}
+                height={20}
+              />
+            </div>
+          </div>
           <div
-            onClick={() => handleOpenLightbox(image)}
-            title="Öppna bild"
+            // title="Öppna bild"
             className={styles.thumbnailWrapper}
           >
             <Image
+              layout="responsive"
               className={styles.img}
               src={image.thumbnail}
               alt={image.title}
@@ -49,20 +64,6 @@ const ImageList = ({
               height={200}
               objectFit="cover"
             />
-          </div>
-          <div className={styles.imageOptions}>
-            <div
-              onClick={() => handleDeleteImage(image.title)}
-              title="Släng"
-              className={styles.iconWrapper}
-            >
-              <Image
-                src="/icons/trash-icon.png"
-                alt="Delete"
-                width={40}
-                height={40}
-              />
-            </div>
           </div>
         </li>
       ))}
