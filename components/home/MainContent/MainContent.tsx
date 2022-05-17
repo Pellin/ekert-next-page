@@ -14,11 +14,12 @@ const MainContent = () => {
             width={200}
             height={200}
             layout="responsive"
+            onContextMenu={(e) => e.preventDefault()}
           />
         </div>
       </Section>
       <Section title="VIDEO&gt;&gt;">
-        <video muted autoPlay loop>
+        <video muted autoPlay loop onContextMenu={(e) => e.preventDefault()}>
           <source src="/videos/sot.mp4" />
         </video>
       </Section>
