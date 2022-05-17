@@ -3,6 +3,19 @@ import { FileData } from '../globalTypes'
 import sharp from 'sharp'
 import { ManagedUpload } from 'aws-sdk/clients/s3'
 
+export const getSignedVideoUrl = async (key: string) => {
+  try {
+    const url = s3.getSignedUrl('getObject', {
+      Bucket: S3_BUCKET!,
+      Key: key,
+    })
+
+    return url
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const uploadFileToS3 = async (file: FileData) => {
   const fileType = getFileType(file.mimetype)
 

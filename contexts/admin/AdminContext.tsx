@@ -64,9 +64,7 @@ const AdminContextProvider = (props: FCProps) => {
 
     const response = await API.uploadFiles(data)
 
-    console.log(response)
-
-    // kolla om video eller image
+    // TODO: kolla om video eller image
     setImages((prev) => [...prev, ...response.files])
 
     return true

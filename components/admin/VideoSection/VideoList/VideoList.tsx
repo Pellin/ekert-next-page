@@ -26,7 +26,7 @@ const VideoList = () => {
             onContextMenu={(e) => e.preventDefault()}
             controls
             controlsList="nodownload"
-            src={video.url}
+            src={video.signedUrl}
           />
         </li>
       ))}

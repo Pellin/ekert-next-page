@@ -64,6 +64,14 @@ export const getVideosFromDB = async () => {
       '/api/admin/videos'
     )
 
+    for (const video of response.data) {
+      const response: AxiosResponse<string> = await axios.get(
+        `/api/admin/videos/${video.title}`
+      )
+
+      video.signedUrl = response.data
+    }
+
     return response.data
   } catch (error) {
     return false
