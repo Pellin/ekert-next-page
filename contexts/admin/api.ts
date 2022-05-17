@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { IImage, IProject } from '../../globalTypes'
+import { IImage, IProject, IVideo } from '../../globalTypes'
 import { EmptyProjectPayload } from './types'
 
 export const getProjectsFromDB = async () => {
@@ -56,4 +56,16 @@ export const deleteImage = async (title: string) => {
   })
 
   return response.data
+}
+
+export const getVideosFromDB = async () => {
+  try {
+    const response: AxiosResponse<IVideo[]> = await axios.get(
+      '/api/admin/videos'
+    )
+
+    return response.data
+  } catch (error) {
+    return false
+  }
 }

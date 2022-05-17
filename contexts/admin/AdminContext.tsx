@@ -32,6 +32,16 @@ const AdminContextProvider = (props: FCProps) => {
     }
   }, [])
 
+  useEffect(() => {
+    try {
+      API.getVideosFromDB().then((fetchedVideos) => {
+        if (fetchedVideos) setVideos(fetchedVideos)
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }, [])
+
   const createEmptyProject = async (payload: EmptyProjectPayload) => {
     try {
       const savedProject = await API.saveProjectToDB(payload)
