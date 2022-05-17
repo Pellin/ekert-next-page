@@ -57,7 +57,7 @@ const ImageList = ({
               className={styles.iconWrapper}
             >
               <Image
-                src="/icons/trash.png"
+                src="/icons/trash-icon.png"
                 alt="Delete"
                 width={40}
                 height={40}

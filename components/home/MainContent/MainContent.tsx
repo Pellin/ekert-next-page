@@ -6,11 +6,6 @@ import Section from './components/Section'
 const MainContent = () => {
   return (
     <div className={styles.mainContainer}>
-      <Section title="VIDEO&gt;&gt;">
-        <video muted autoPlay loop>
-          <source src="/videos/sot.mp4" />
-        </video>
-      </Section>
       <Section title="FOTOGRAFI&gt;&gt;">
         <div className={styles.imageWrapper}>
           <Image
@@ -21,6 +16,11 @@ const MainContent = () => {
             layout="responsive"
           />
         </div>
+      </Section>
+      <Section title="VIDEO&gt;&gt;">
+        <video muted autoPlay loop>
+          <source src="/videos/sot.mp4" />
+        </video>
       </Section>
     </div>
   )

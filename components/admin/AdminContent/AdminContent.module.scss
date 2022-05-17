@@ -1,4 +1,39 @@
+@import '../../../styles/variables.scss';
+
 .adminContent {
   padding: 1rem;
   position: relative;
+
+  section {
+    border-radius: 2px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    margin-bottom: 2rem;
+    padding: 0 1rem 2rem;
+
+    .sectionHeader {
+      align-items: center;
+      background-color: #e2e2e2;
+      height: 6rem;
+      display: flex;
+      padding: 0 1rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 5;
+
+      h2 {
+        color: $off-black;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        margin: 0;
+      }   
+
+    }
+
+    .empty {
+      height: 8rem;
+    }
+  }
 }
