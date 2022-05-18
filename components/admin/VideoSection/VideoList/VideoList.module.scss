@@ -2,16 +2,16 @@
 
 .videoList {
   list-style: none;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 38rem);  
+  grid-template-rows: repeat(auto-fill, auto);
   padding: 0;
   margin: 0;
+  gap: 1rem;
 
   .videoCard {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-    margin-bottom: 1rem;
-    margin-right: 1rem;
-    max-width: 40rem;
+    width: 100%;
     overflow: hidden;
     
     .cardHeader {
@@ -30,7 +30,7 @@
 
     video {
       display: block;
-      max-width: 40rem;
+      width: 100%;
     }
   }
 }
