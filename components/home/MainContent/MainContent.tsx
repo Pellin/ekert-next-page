@@ -9,6 +9,7 @@ const MainContent = () => {
       <Section title="FOTOGRAFI&gt;&gt;">
         <div className={styles.imageWrapper}>
           <Image
+            priority
             src="/images/ae-selfie.jpg"
             alt="Anders Ekert"
             width={200}
