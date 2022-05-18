@@ -11,6 +11,7 @@ export interface AdminContextInterface {
   deleteImage: (title: string) => Promise<boolean>
   setImages: React.Dispatch<React.SetStateAction<IImage[]>>
   setVideos: React.Dispatch<React.SetStateAction<IVideo[]>>
+  refreshVideoUrl: (title: string) => Promise<string>
 }
 
 export type EmptyProjectPayload = {

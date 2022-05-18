@@ -65,15 +65,21 @@ export const getVideosFromDB = async () => {
     )
 
     for (const video of response.data) {
-      const response: AxiosResponse<string> = await axios.get(
-        `/api/admin/videos/${video.title}`
-      )
+      const signedUrl: string = await getSignedVideoUrl(video.title)
 
-      video.signedUrl = response.data
+      video.signedUrl = signedUrl
     }
 
     return response.data
   } catch (error) {
     return false
   }
+}
+
+export const getSignedVideoUrl = async (title: string) => {
+  const response: AxiosResponse<string> = await axios.get(
+    `/api/admin/videos/${title}`
+  )
+
+  return response.data
 }
