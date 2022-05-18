@@ -9,12 +9,14 @@
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     position: relative;
     margin-bottom: 2rem;
-    padding: 0 1rem 2rem;
+    padding: 0 2rem 3rem;
 
     .sectionHeader {
       align-items: center;
-      background-color: #e2e2e2;
-      height: 6rem;
+      background-color: #fff;
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+      height: 5rem;
       display: flex;
       padding: 0 1rem;
       position: absolute;
@@ -23,13 +25,18 @@
       right: 0;
       z-index: 5;
 
+      .iconWrapper {
+        height: 2rem;
+        margin-right: 1rem;
+        width: 2.4rem;
+      }
+
       h2 {
         color: $off-black;
         font-family: 'Roboto', sans-serif;
-        font-weight: 400;
+        font-weight: 500;
         margin: 0;
       }   
-
     }
 
     .empty {

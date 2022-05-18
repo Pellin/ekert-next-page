@@ -21,7 +21,7 @@ const UploadForm = () => {
     if (!filesUploaded) {
       setUploadError(true)
     }
-
+    handleClearInput()
     setIsuploading(false)
   }
 

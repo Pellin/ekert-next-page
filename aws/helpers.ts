@@ -94,7 +94,7 @@ export const createAndUploadThumbnailToS3 = async (file: FileData) => {
 
   const thumbnail = await sharp(file.data)
     .rotate()
-    .resize({ width: 150 })
+    .resize({ width: 200 })
     .toBuffer()
 
   const thumbnailParams = {

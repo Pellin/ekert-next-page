@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import Image from 'next/image'
 import { AdminContext } from '../../../contexts/admin/AdminContext'
 import { IImage } from '../../../globalTypes'
 import ImageList from './ImageList'
@@ -13,6 +14,14 @@ const ImageSection = () => {
   return (
     <section>
       <div className={styles.sectionHeader}>
+        <div className={styles.iconWrapper}>
+          <Image
+            src={'/icons/image-icon.png'}
+            alt="Bilder"
+            width={24}
+            height={20}
+          />
+        </div>
         <h2>Bilder</h2>
       </div>
       <div className={styles.empty}></div>
@@ -24,7 +33,7 @@ const ImageSection = () => {
       <Lightbox
         setShowLightbox={setShowLightbox}
         visible={showLightbox}
-        image={currentImage}
+        image={currentImage!}
       />
     </section>
   )

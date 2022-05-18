@@ -13,6 +13,7 @@ const imageSchema = new Schema({
   thumbnail: {
     type: String,
   },
+  size: Number,
 })
 
 export default mongoose.models.Image || mongoose.model('Image', imageSchema)

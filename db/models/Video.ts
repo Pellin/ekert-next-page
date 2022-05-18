@@ -10,7 +10,7 @@ const videoSchema = new Schema({
     required: true,
     unique: true,
   },
-  description: String,
+  size: Number,
 })
 
 export default mongoose.models.Video || mongoose.model('Video', videoSchema)

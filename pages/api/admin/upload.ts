@@ -55,6 +55,7 @@ const handleFileUpload = async (file: FileData) => {
       const newImage: IImage = new Image({
         title: file.name,
         url: success.url,
+        size: file.size,
         thumbnail: success.thumbnail,
       })
 
@@ -65,6 +66,7 @@ const handleFileUpload = async (file: FileData) => {
       const newVideo: IVideo = new Video({
         title: file.name,
         url: success.url,
+        size: file.size,
       })
 
       const uploadedVideo = await addVideoToDatabase(newVideo)

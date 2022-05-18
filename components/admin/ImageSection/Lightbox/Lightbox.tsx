@@ -10,57 +10,53 @@ type LightBoxProps = {
 }
 
 const Lightbox = ({ image, visible, setShowLightbox }: LightBoxProps) => {
-  const [naturalWidth, setNaturalWidth] = useState(300)
-  const [naturalHeight, setNaturalHeight] = useState(250)
-  const [dimensions, setDimension] = useState({
-    width: `${naturalWidth}px`,
-    height: `${naturalHeight}px`,
-  })
+  const [naturalHeight, setNaturalHeight] = useState(400)
+  const [naturalWidth, setNaturalWidth] = useState(400)
+  const [isLandscape, setIsLandscape] = useState(false)
 
-  const handleOnLoad = (e: SyntheticEvent<HTMLImageElement>) => {
-    // @ts-ignore
-    const imageWidth = e.target.naturalWidth
-    // @ts-ignore
-    const imageHeight = e.target.naturalHeight
-
-    calculateWidthAndHeight(imageHeight, imageWidth)
+  const getDimensions = (e: SyntheticEvent<HTMLImageElement>) => {
+    setIsLandscape(e.currentTarget.naturalWidth > e.currentTarget.naturalHeight)
+    setNaturalHeight(e.currentTarget.naturalHeight)
+    setNaturalWidth(e.currentTarget.naturalWidth)
   }
 
-  const calculateWidthAndHeight = (h: number, w: number) => {
-    console.log(h)
-    console.log(w)
+  if (!image) return null
+  console.log(image.size)
 
-    setNaturalHeight(h)
-    setNaturalWidth(w)
-  }
+  const imageSize = `${(
+    image.size / (image.size > 1000000 ? 1000000 : 1000)
+  ).toFixed(1)} ${image.size > 1000000 ? 'MB' : 'KB'}`
 
   return (
     <div className={visible ? styles.lightbox : styles.hidden}>
-      <div
-        className={styles.imageWrapper}
-        style={{ width: `${naturalWidth}px`, height: `${naturalHeight}px` }}
-      >
-        {image && (
+      <aside className={styles.infoBox}>
+        <h3>{image.title}</h3>
+        <h4>{imageSize}</h4>
+      </aside>
+      <div className={styles.imageContainer}>
+        <div
+          className={styles.imageWrapper}
+          style={isLandscape ? { width: '75%' } : { width: '50%' }}
+        >
           <Image
-            onLoad={(e) => handleOnLoad(e)}
-            layout="responsive"
-            sizes="90vw"
-            src={image.url}
             alt={image.title}
-            width={naturalWidth}
             height={naturalHeight}
+            layout="responsive"
+            onLoad={(e) => getDimensions(e)}
+            src={image.url}
+            width={naturalWidth}
           />
-        )}
+        </div>
       </div>
       <div
         onClick={() => setShowLightbox(false)}
         className={styles.iconWrapper}
       >
         <Image
-          src="/icons/close-icon.png"
           alt="close-icon"
-          width={20}
           height={20}
+          src="/icons/close-icon.png"
+          width={20}
         />
       </div>
     </div>

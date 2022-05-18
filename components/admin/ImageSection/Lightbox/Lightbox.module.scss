@@ -3,9 +3,11 @@
 .lightbox {
   align-items: center;
   background-color: $off-black;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 30% 1fr;
   justify-content: center;
+  padding: 2rem;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -13,9 +15,28 @@
   right: 0;
   z-index: 40;
 
-  .imageWrapper {
+  .infoBox {
+    padding-left: 10rem;
     z-index: 100;
-    object-fit: contain;
+
+    h3, h4 {
+      color: $off-white
+    }
+
+    h4 {
+      font-size: 1.2rem;
+    }
+  }
+
+  .imageContainer {
+    display: grid;
+    place-items: center;
+
+    .imageWrapper {
+      align-self: center;
+      object-fit: none;
+      z-index: 100;
+    }
   }
 
   .iconWrapper {
