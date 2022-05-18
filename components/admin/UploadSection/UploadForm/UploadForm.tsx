@@ -46,7 +46,13 @@ const UploadForm = () => {
       encType="multipart/form-data"
       onSubmit={handleUpload}
     >
-      <input onChange={handleChange} ref={inputRef} type="file" multiple />
+      <input
+        onChange={handleChange}
+        ref={inputRef}
+        type="file"
+        multiple
+        accept=".jpg,.jpeg,.png,.gif,.mp4,.mov,.mpeg4,.wmv,.flv,.avi"
+      />
       <div className={styles.buttons}>
         <Button
           icon={{ name: 'trash-icon.png', alt: 'Rensa' }}
