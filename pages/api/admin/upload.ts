@@ -3,7 +3,8 @@ import nc from 'next-connect'
 import fileUpload from 'express-fileupload'
 import { getFileType, uploadFileToS3 } from '../../../aws/helpers'
 import Image from '../../../db/models/Image'
-import { FileData, IImage } from '../../../globalTypes'
+import Video from '../../../db/models/Video'
+import { FileData, IImage, IVideo } from '../../../globalTypes'
 
 export const config = {
   api: {
@@ -58,9 +59,17 @@ const handleFileUpload = async (file: FileData) => {
       })
 
       const uploadedImage = await addImageToDatabase(newImage)
-      console.log(uploadedImage)
 
       return uploadedImage
+    } else if (fileType === 'videos') {
+      const newVideo: IVideo = new Video({
+        title: file.name,
+        url: success.url,
+      })
+
+      const uploadedVideo = await addVideoToDatabase(newVideo)
+
+      return uploadedVideo
     }
   }
 }
@@ -69,6 +78,12 @@ const addImageToDatabase = async (image: IImage) => {
   const newImage = await Image.create(image)
 
   return newImage
+}
+
+const addVideoToDatabase = async (video: IVideo) => {
+  const newVideo = await Video.create(video)
+
+  return newVideo
 }
 
 export default handler

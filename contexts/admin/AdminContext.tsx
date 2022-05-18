@@ -64,8 +64,15 @@ const AdminContextProvider = (props: FCProps) => {
 
     const response = await API.uploadFiles(data)
 
-    // TODO: kolla om video eller image
-    setImages((prev) => [...prev, ...response.files])
+    const uploadedVideos = response.files.filter((file: IImage | IVideo) =>
+      file.title.match(/mov|mp4|mpeg4|wmv|flv|avi/i)
+    )
+    const uploadedImages = response.files.filter((file: IImage | IVideo) =>
+      file.title.match(/jpeg|jpg|png|gif/i)
+    )
+
+    setImages((prev) => [...prev, ...uploadedImages])
+    setVideos((prev) => [...prev, ...uploadedVideos])
 
     return true
   }
@@ -81,6 +88,12 @@ const AdminContextProvider = (props: FCProps) => {
     }
   }
 
+  const refreshVideoUrl = async (title: string) => {
+    const url = await API.getSignedVideoUrl(title)
+
+    return url
+  }
+
   const adminContext: AdminContextInterface = {
     images,
     videos,
@@ -90,6 +103,7 @@ const AdminContextProvider = (props: FCProps) => {
     deleteImage,
     setImages,
     setVideos,
+    refreshVideoUrl,
   }
 
   return (
