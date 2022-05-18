@@ -10,8 +10,8 @@
 
   .imageCard {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-    height: 24rem;
-    width: 20rem;
+    height: 100%;
+    width: 100%;
 
     .imageHeader {
       align-items: center;
@@ -34,8 +34,8 @@
     }
 
     .thumbnailWrapper {
-      height: 20rem;
-      width: 20rem;
+      height: 100%;
+      width: 100%;
       object-fit: contain;
     }
   }
