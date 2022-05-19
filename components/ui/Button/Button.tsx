@@ -5,8 +5,10 @@ import styles from './Button.module.scss'
 type ButtonProps = {
   icon?:
     | {
-        name: string
         alt: string
+        height?: number
+        name: string
+        width?: number
       }
     | false
   type?: string
@@ -38,8 +40,8 @@ const Button = ({
             className={styles.icon}
             src={`/icons/${icon.name}`}
             alt={styles.alt}
-            width={14}
-            height={14}
+            width={icon.width || 14}
+            height={icon.height || 14}
           />
         </div>
       )}
