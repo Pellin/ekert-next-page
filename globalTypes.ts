@@ -9,11 +9,13 @@ export interface IImage {
   title: string
   url: string
   thumbnail: string
+  size: number
 }
 export interface IVideo {
   _id?: string
   title: string
   url: string
+  size: number
   signedUrl?: string
 }
 
@@ -21,7 +23,7 @@ export interface IProject {
   _id?: string
   title: string
   images: IImage[]
-  videos: string[]
+  videos: IVideo[]
   description?: string
   slug: string
   isProtected: boolean
