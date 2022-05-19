@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 
-const videoSchema = new Schema({
+export const videoSchema = new Schema({
   title: {
     type: String,
     required: true,

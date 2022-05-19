@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 
-const imageSchema = new Schema({
+export const imageSchema = new Schema({
   title: {
     type: String,
     required: true,
