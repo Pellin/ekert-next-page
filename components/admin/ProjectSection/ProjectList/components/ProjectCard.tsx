@@ -6,23 +6,25 @@ import Link from 'next/link'
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
-    <Link href={`/admin/projects/${project.slug}`}>
+    <Link href={`/admin/projects/${project._id}`}>
       <div title={`Gå till ${project.title}`} className={styles.projectCard}>
-        <div className={styles.titleRow}>
+        <div className={styles.titleAndInfo}>
           <h3>{project.title}</h3>
+          <p>
+            {project.images.length}{' '}
+            {project.images.length === 1 ? 'bild' : 'bilder'},{' '}
+            {project.videos.length}{' '}
+            {project.videos.length === 1 ? 'video' : 'videor'}
+          </p>
         </div>
-        <p>{project.images.length} bilder</p>
-        <p>{project.videos.length} videor</p>
-        {project.images.length ? (
-          <div className={styles.projectImageWrapper}>
-            <Image
-              src={project.images[0].thumbnail}
-              alt={project.title}
-              width={50}
-              height={50}
-            />
-          </div>
-        ) : null}
+        <div className={styles.iconWrapper}>
+          <Image
+            src="/icons/chevron-right-icon.png"
+            alt="Gå till projekt"
+            width={24}
+            height={30}
+          />
+        </div>
       </div>
     </Link>
   )

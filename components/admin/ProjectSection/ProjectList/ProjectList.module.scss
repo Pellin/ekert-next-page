@@ -2,36 +2,38 @@
 
 .projectList {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   list-style: none;
   margin: 0;
   padding: 0;
 
   .projectCard {
+    align-items: center;
+    background-color: #fff;
     box-shadow: 0 1px 4px $shadow;
     color: $off-black;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 1rem;
     margin-right: 1rem;
     padding: 1rem;
     position: relative;
-    width: 20rem;
-
-    .titleRow {
-      align-items: center;
-      display: flex;
-      justify-content: space-between;
-
-      .iconWrapper {
-        cursor: pointer;
-        height: 1.4rem;
-        width: 1.4rem;
+    
+    .titleAndInfo {
+      h3 {
+        margin-bottom: 0.5rem;
       }
+      p {
+        margin: 0;
+      }
+
     }
 
-    .projectImageWrapper {
-      height: 4rem;
-      width: 100%;
+    .iconWrapper {
+      cursor: pointer;
+      height: 1.4rem;
+      width: 1.4rem;
     }
   }
 }
