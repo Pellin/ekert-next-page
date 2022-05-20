@@ -1,6 +1,5 @@
 import React from 'react'
 import ImageSection from '../ImageSection'
-import ImageModal from '../ImageSection/Lightbox'
 import ProjectSection from '../ProjectSection'
 import UploadSection from '../UploadSection/UploadSection'
 import VideoSection from '../VideoSection'
