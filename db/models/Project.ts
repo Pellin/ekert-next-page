@@ -1,12 +1,10 @@
 import mongoose, { Schema } from 'mongoose'
-import { imageSchema } from './Image'
-import { videoSchema } from './Video'
 
 const projectSchema = new Schema({
   title: String,
   description: String,
-  images: [imageSchema],
-  videos: [videoSchema],
+  images: [String],
+  videos: [String],
   slug: String,
 })
 

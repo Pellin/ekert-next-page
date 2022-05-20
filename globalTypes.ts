@@ -22,8 +22,8 @@ export interface IVideo {
 export interface IProject {
   _id?: string
   title: string
-  images: IImage[]
-  videos: IVideo[]
+  images: string[]
+  videos: string[]
   description?: string
   slug: string
   isProtected: boolean
@@ -35,4 +35,11 @@ export interface FileData {
   size: number
   encoding: string
   mimetype: string
+}
+
+export type File = IImage | IVideo
+
+export enum FileType {
+  IMAGE,
+  VIDEO,
 }
