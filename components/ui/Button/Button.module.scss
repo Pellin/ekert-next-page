@@ -11,10 +11,11 @@
   padding: 0.5rem 1rem;
 
   &:hover {
-    background-color: #f5f5f5;
+    background-color: $off-white;
   }
 
   &.disabled {
+    cursor: default;
     opacity: 0.5;
   }
 

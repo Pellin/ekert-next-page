@@ -1,3 +1,5 @@
+@import '../../../../styles/variables.scss';
+
 .imageGrid {
   align-self: center;
   display: grid;
@@ -15,7 +17,7 @@
 
     .imageHeader {
       align-items: center;
-      background-color: #fff;
+      background-color: $white;
       display: flex;
       height: 4rem;
       justify-content: space-between;
