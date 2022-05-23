@@ -1,32 +1,15 @@
-import React from 'react'
-import { IImage } from '../../../../globalTypes'
-import styles from './ImageList.module.scss'
+import React, { useContext } from 'react'
 import ImageCard from './components/ImageCard'
+import { AdminContext } from '../../../../contexts/admin/AdminContext'
+import styles from './ImageList.module.scss'
 
-type ImageListProps = {
-  images: IImage[]
-  setShowLightbox: React.Dispatch<React.SetStateAction<boolean>>
-  setCurrentImage: React.Dispatch<React.SetStateAction<IImage | null>>
-}
-
-const ImageList = ({
-  images,
-  setShowLightbox,
-  setCurrentImage,
-}: ImageListProps) => {
-  const handleOpenLightbox = (image: IImage) => {
-    setCurrentImage(image)
-    setShowLightbox(true)
-  }
+const ImageList = () => {
+  const { images } = useContext(AdminContext)!
 
   return (
     <ul className={styles.imageGrid}>
       {images.map((image) => (
-        <ImageCard
-          key={image._id}
-          image={image}
-          openLightbox={handleOpenLightbox}
-        />
+        <ImageCard key={image._id} image={image} />
       ))}
     </ul>
   )

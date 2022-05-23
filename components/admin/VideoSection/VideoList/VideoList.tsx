@@ -1,5 +1,4 @@
-import Image from 'next/image'
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext } from 'react'
 import { AdminContext } from '../../../../contexts/admin/AdminContext'
 import VideoCard from './VideoCard'
 import styles from './VideoList.module.scss'

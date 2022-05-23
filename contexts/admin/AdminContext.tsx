@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import * as API from './api'
-import { FCProps, IImage, IProject, IVideo } from '../../globalTypes'
+import { FCProps, IImage, IProject, IFile, IVideo } from '../../globalTypes'
 import { AdminContextInterface, EmptyProjectPayload } from './types'
 
 export const AdminContext = React.createContext<AdminContextInterface | null>(
@@ -10,6 +10,8 @@ export const AdminContext = React.createContext<AdminContextInterface | null>(
 const AdminContextProvider = (props: FCProps) => {
   const [images, setImages] = useState<IImage[]>([])
   const [videos, setVideos] = useState<IVideo[]>([])
+  const [currentFile, setCurrentFile] = useState<IFile | null>(null)
+  const [showLightbox, setShowLightbox] = useState(false)
   const [projects, setProjects] = useState<IProject[]>([])
 
   useEffect(() => {
@@ -41,6 +43,11 @@ const AdminContextProvider = (props: FCProps) => {
       console.log(error)
     }
   }, [])
+
+  const openLightbox = (file: IFile) => {
+    setCurrentFile(file)
+    setShowLightbox(true)
+  }
 
   const createEmptyProject = async (payload: EmptyProjectPayload) => {
     try {
@@ -102,6 +109,35 @@ const AdminContextProvider = (props: FCProps) => {
     return success
   }
 
+  const removeFilesFromProject = async (
+    projectId: string,
+    images: IImage[],
+    videos: IVideo[]
+  ) => {
+    const project = projects.find((proj) => proj._id === projectId)
+
+    if (!project) return false
+
+    if (images.length) {
+      project.images = project.images.filter(
+        (imageId) => !images.map((image) => image._id).includes(imageId)
+      )
+    }
+
+    if (videos.length) {
+      project.videos = project.videos.filter(
+        (videoId) => !videos.map((video) => video._id).includes(videoId)
+      )
+    }
+
+    const success = await API.updateProjectInDB(projectId, {
+      images: project.images,
+      videos: project.videos,
+    })
+
+    return success
+  }
+
   const deleteImage = async (title: string): Promise<boolean> => {
     try {
       await API.deleteImage(title)
@@ -126,10 +162,16 @@ const AdminContextProvider = (props: FCProps) => {
     uploadFiles,
     createEmptyProject,
     addFilesToProject,
+    removeFilesFromProject,
     deleteImage,
     setImages,
     setVideos,
     refreshVideoUrl,
+    currentFile,
+    setCurrentFile,
+    showLightbox,
+    setShowLightbox,
+    openLightbox,
   }
 
   return (

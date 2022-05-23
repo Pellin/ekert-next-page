@@ -1,4 +1,4 @@
-import { IProject, IImage, IVideo } from '../../globalTypes'
+import { IProject, IImage, IVideo, IFile } from '../../globalTypes'
 
 export interface AdminContextInterface {
   images: IImage[]
@@ -13,10 +13,20 @@ export interface AdminContextInterface {
     images: string[],
     videos: string[]
   ) => Promise<boolean>
+  removeFilesFromProject: (
+    projectId: string,
+    images: IImage[],
+    videos: IVideo[]
+  ) => Promise<boolean>
   deleteImage: (title: string) => Promise<boolean>
   setImages: React.Dispatch<React.SetStateAction<IImage[]>>
   setVideos: React.Dispatch<React.SetStateAction<IVideo[]>>
   refreshVideoUrl: (title: string) => Promise<string>
+  openLightbox: (file: IFile) => void
+  currentFile: IFile | null
+  setCurrentFile: React.Dispatch<React.SetStateAction<IFile | null>>
+  showLightbox: boolean
+  setShowLightbox: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export type EmptyProjectPayload = {

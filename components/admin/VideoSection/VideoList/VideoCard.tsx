@@ -1,11 +1,11 @@
-import Image from 'next/image'
 import React, { useContext, useRef, useState } from 'react'
+import Image from 'next/image'
 import { AdminContext } from '../../../../contexts/admin/AdminContext'
 import { IVideo } from '../../../../globalTypes'
 import styles from './VideoList.module.scss'
 
 const VideoCard = ({ video }: { video: IVideo }) => {
-  const { refreshVideoUrl } = useContext(AdminContext)!
+  const { openLightbox, refreshVideoUrl } = useContext(AdminContext)!
   const videoRef = useRef<HTMLVideoElement>(null)
   const [currentUrl, setCurrentUrl] = useState(video.signedUrl)
   const [isUpdating, setIsUpdating] = useState(false)
@@ -24,8 +24,12 @@ const VideoCard = ({ video }: { video: IVideo }) => {
   return (
     <li className={styles.videoCard}>
       <div className={styles.cardHeader}>
-        <h3>{video.title}</h3>
-        <div className={styles.iconWrapper}>
+        <p>{video.title}</p>
+        <div
+          onClick={() => openLightbox(video)}
+          title="Inspektera"
+          className={styles.iconWrapper}
+        >
           <Image
             title="Inspektera"
             src="/icons/info-icon.png"

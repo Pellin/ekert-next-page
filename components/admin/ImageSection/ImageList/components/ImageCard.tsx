@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Image from 'next/image'
+import { AdminContext } from '../../../../../contexts/admin/AdminContext'
 import { IImage } from '../../../../../globalTypes'
 import styles from '../ImageList.module.scss'
 
 type ImageCardProps = {
   image: IImage
-  openLightbox: (image: IImage) => void
 }
 
-const ImageCard = ({ image, openLightbox }: ImageCardProps) => {
+const ImageCard = ({ image }: ImageCardProps) => {
+  const { openLightbox } = useContext(AdminContext)!
+
   return (
     <li className={styles.imageCard} key={image._id}>
       <div className={styles.imageHeader}>

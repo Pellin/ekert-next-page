@@ -38,7 +38,7 @@ export interface FileData {
   mimetype: string
 }
 
-export type File = IImage | IVideo
+export type IFile = IImage | IVideo
 
 export enum FileType {
   IMAGE,

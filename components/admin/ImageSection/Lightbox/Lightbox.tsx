@@ -1,17 +1,17 @@
-import Image from 'next/image'
 import React, { SyntheticEvent, useContext, useEffect, useState } from 'react'
+import Image from 'next/image'
 import { AdminContext } from '../../../../contexts/admin/AdminContext'
-import { IImage, IProject } from '../../../../globalTypes'
+import { IImage, IProject, IVideo } from '../../../../globalTypes'
 import styles from './Lightbox.module.scss'
 
-type LightBoxProps = {
-  image: IImage | null
-  visible: boolean
-  setShowLightbox: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-const Lightbox = ({ image, visible, setShowLightbox }: LightBoxProps) => {
-  const { projects } = useContext(AdminContext)!
+const Lightbox = () => {
+  const {
+    projects,
+    removeFilesFromProject,
+    currentFile,
+    showLightbox,
+    setShowLightbox,
+  } = useContext(AdminContext)!
   const [associatedProjects, setAssociatedProjects] = useState<IProject[]>([])
   const [naturalHeight, setNaturalHeight] = useState(400)
   const [naturalWidth, setNaturalWidth] = useState(400)
@@ -19,9 +19,13 @@ const Lightbox = ({ image, visible, setShowLightbox }: LightBoxProps) => {
 
   useEffect(() => {
     setAssociatedProjects(
-      projects.filter((project) => project.images.includes(image?._id!))
+      projects.filter(
+        (project) =>
+          project.images.includes(currentFile?._id!) ||
+          project.videos.includes(currentFile?._id!)
+      )
     )
-  }, [projects, image?._id!])
+  }, [projects, currentFile?._id!])
 
   const getDimensions = (e: SyntheticEvent<HTMLImageElement>) => {
     setIsLandscape(e.currentTarget.naturalWidth > e.currentTarget.naturalHeight)
@@ -29,24 +33,32 @@ const Lightbox = ({ image, visible, setShowLightbox }: LightBoxProps) => {
     setNaturalWidth(e.currentTarget.naturalWidth)
   }
 
-  if (!image) return null
+  if (!currentFile) return null
 
-  const imageSize = `${(
-    image.size / (image.size > 1000000 ? 1000000 : 1000)
-  ).toFixed(1)} ${image.size > 1000000 ? 'MB' : 'KB'}`
+  const fileSize = `${(
+    currentFile.size / (currentFile.size > 1000000 ? 1000000 : 1000)
+  ).toFixed(1)} ${currentFile.size > 1000000 ? 'MB' : 'KB'}`
 
-  const handleRemoveImageFromProject = (projectId: string) => {
+  // @ts-ignore
+  const isImage = !currentFile.signedUrl
+
+  const handleRemoveFileFromProject = async (projectId: string) => {
     setAssociatedProjects((prev) =>
-      // call context removeImageFromProject
       prev.filter((project) => project._id !== projectId)
     )
+
+    if (isImage) {
+      await removeFilesFromProject(projectId, [currentFile as IImage], [])
+    } else {
+      await removeFilesFromProject(projectId, [], [currentFile as IVideo])
+    }
   }
 
   return (
-    <div className={visible ? styles.lightbox : styles.hidden}>
+    <div className={showLightbox ? styles.lightbox : styles.hidden}>
       <aside className={styles.infoBox}>
-        <h2>{image.title}</h2>
-        <h4>{imageSize}</h4>
+        <h2>{currentFile.title}</h2>
+        <h4>{fileSize}</h4>
         <h3>I projekt:</h3>
         {associatedProjects.length ? (
           <ul className={styles.associatedProjects}>
@@ -54,7 +66,7 @@ const Lightbox = ({ image, visible, setShowLightbox }: LightBoxProps) => {
               <li className={styles.projectRow} key={project._id}>
                 <p>{project.title}</p>
                 <div
-                  onClick={() => handleRemoveImageFromProject(project._id!)}
+                  onClick={() => handleRemoveFileFromProject(project._id!)}
                   title="Ta bort från projekt"
                   className={styles.minusIconWrapper}
                 >
@@ -73,21 +85,28 @@ const Lightbox = ({ image, visible, setShowLightbox }: LightBoxProps) => {
           <p>Inga associerade projekt</p>
         )}
       </aside>
-      <div className={styles.imageContainer}>
-        <div
-          className={styles.imageWrapper}
-          style={isLandscape ? { width: '75%' } : { width: '50%' }}
-        >
-          <Image
-            alt={image.title}
-            height={naturalHeight}
-            layout="responsive"
-            onLoad={(e) => getDimensions(e)}
-            src={image.url}
-            width={naturalWidth}
-          />
+      {isImage ? (
+        <div className={styles.imageContainer}>
+          <div
+            className={styles.imageWrapper}
+            style={isLandscape ? { width: '75%' } : { width: '50%' }}
+          >
+            <Image
+              alt={currentFile.title}
+              height={naturalHeight}
+              layout="responsive"
+              onLoad={(e) => getDimensions(e)}
+              src={currentFile.url}
+              width={naturalWidth}
+            />
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className={styles.videoContainer}>
+          {/*// @ts-ignore */}
+          <video controls src={currentFile.signedUrl} />
+        </div>
+      )}
       <div
         onClick={() => setShowLightbox(false)}
         className={styles.iconWrapper}

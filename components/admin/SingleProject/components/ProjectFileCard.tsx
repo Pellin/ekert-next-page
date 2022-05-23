@@ -1,13 +1,13 @@
 import React, { ReducerWithoutAction, useEffect, useReducer } from 'react'
 import Image from 'next/image'
 import SelectIcon from './icons/SelectIcon'
-import { File, FileType } from '../../../../globalTypes'
+import { IFile, FileType } from '../../../../globalTypes'
 import styles from '../SingleProject.module.scss'
 
 type ProjectFileCardProps = {
   add?: boolean
   disable?: boolean
-  file: File
+  file: IFile
   fileType: FileType
   selected?: string[]
   setSelected?: React.Dispatch<React.SetStateAction<string[]>>

@@ -58,7 +58,7 @@
     }
   }
 
-  .imageContainer {
+  .imageContainer, .videoContainer {
     display: grid;
     place-items: center;
 
@@ -66,6 +66,11 @@
       align-self: center;
       object-fit: none;
       z-index: 100;
+    }
+
+    video {
+      display: block;
+      width: 80%;
     }
   }
 
