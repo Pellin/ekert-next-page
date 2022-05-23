@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 import { IImage, IProject, IVideo } from '../../globalTypes'
-import { EmptyProjectPayload } from './types'
+import { EmptyProjectPayload, ProjectUpdate } from './types'
 
 export const getProjectsFromDB = async () => {
   try {
@@ -20,6 +20,15 @@ export const saveProjectToDB = async (payload: EmptyProjectPayload) => {
   })
 
   return response.data
+}
+
+export const updateProjectInDB = async (
+  projectId: string,
+  update: ProjectUpdate
+) => {
+  const response = await axios.put('/api/admin/projects', { projectId, update })
+
+  return response.data.acknowledged as boolean
 }
 
 export const uploadFiles = async (data: FormData) => {

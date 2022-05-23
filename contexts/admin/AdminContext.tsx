@@ -77,6 +77,31 @@ const AdminContextProvider = (props: FCProps) => {
     return true
   }
 
+  const addFilesToProject = async (
+    projectId: string,
+    images: string[],
+    videos: string[]
+  ) => {
+    const project = projects.find((proj) => proj._id === projectId)
+
+    if (!project) return false
+
+    if (images.length) {
+      project.images.push(...images)
+    }
+
+    if (videos.length) {
+      project.videos.push(...videos)
+    }
+
+    const success = await API.updateProjectInDB(projectId, {
+      images: project.images,
+      videos: project.videos,
+    })
+
+    return success
+  }
+
   const deleteImage = async (title: string): Promise<boolean> => {
     try {
       await API.deleteImage(title)
@@ -100,6 +125,7 @@ const AdminContextProvider = (props: FCProps) => {
     projects,
     uploadFiles,
     createEmptyProject,
+    addFilesToProject,
     deleteImage,
     setImages,
     setVideos,
