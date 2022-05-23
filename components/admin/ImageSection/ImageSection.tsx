@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react'
 import Image from 'next/image'
 import { AdminContext } from '../../../contexts/admin/AdminContext'
-import { IImage } from '../../../globalTypes'
 import ImageList from './ImageList'
 import Lightbox from './Lightbox'
+import { IImage } from '../../../globalTypes'
 import styles from '../../admin/AdminContent/AdminContent.module.scss'
 
 const ImageSection = () => {
