@@ -27,6 +27,7 @@ export interface IProject {
   description?: string
   slug: string
   isProtected: boolean
+  password?: string
 }
 
 export interface FileData {
