@@ -1,0 +1,19 @@
+[
+  { "name": "Nexiko", "logo": "/logos/nexico.png" },
+  { "name": "Jarowskij", "logo": "/logos/jarowskij.svg" },
+  { "name": "SVT", "logo": "/logos/svt.svg" },
+  { "name": "TV4", "logo": "/logos/tv4.png" },
+  { "name": "Dare", "logo": "/logos/dare.png" },
+  { "name": "Tale Content", "logo": "/logos/tale.jpeg" },
+  { "name": "NEP", "logo": "/logos/nep.png" },
+  { "name": "Storyfire", "logo": "/logos/storyfire.jpeg" },
+  { "name": "Strix", "logo": "/logos/strix.png" },
+  { "name": "ITV", "logo": "/logos/itv.png" },
+  { "name": "Mastiff", "logo": "/logos/mastiff.png" },
+  { "name": "Art89", "logo": "/logos/art89.png" },
+  { "name": "UR", "logo": "/logos/ur.png" },
+  { "name": "Baluba", "logo": "/logos/baluba.svg" },
+  { "name": "Meter Television", "logo": "/logos/meter.png" },
+  { "name": "Nordisk Film och TV", "logo": "/logos/nordisk.svg" },
+  { "name": "Fremantle", "logo": "/logos/fremantle.svg" }
+]
