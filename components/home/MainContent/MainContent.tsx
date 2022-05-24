@@ -2,11 +2,12 @@ import React from 'react'
 import Image from 'next/image'
 import styles from './MainContent.module.scss'
 import Section from './components/Section'
+import ClientSection from '../ClientSection'
 
 const MainContent = () => {
   return (
     <div className={styles.mainContainer}>
-      <Section title="FOTOGRAFI&gt;&gt;">
+      <Section link="/fotografi" title="FOTOGRAFI&gt;&gt;">
         <div className={styles.imageWrapper}>
           <Image
             priority
@@ -19,11 +20,12 @@ const MainContent = () => {
           />
         </div>
       </Section>
-      <Section title="VIDEO&gt;&gt;">
+      <Section link="/video" title="VIDEO&gt;&gt;">
         <video muted autoPlay loop onContextMenu={(e) => e.preventDefault()}>
           <source src="/videos/sot.mp4" />
         </video>
       </Section>
+      <ClientSection />
     </div>
   )
 }

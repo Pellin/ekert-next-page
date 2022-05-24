@@ -1,0 +1,25 @@
+@import '../../../styles/variables.scss';
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    color: $off-black;
+    font-size: 8vw;
+    margin: 0;
+  }
+
+  .imageList {
+    list-style: none;
+    padding: 0;
+
+    .imageWrapper {
+      width: '100%';
+      max-width: auto;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: -1px;
+    }
+  }
+}
