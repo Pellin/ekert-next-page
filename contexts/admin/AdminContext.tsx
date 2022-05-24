@@ -74,6 +74,14 @@ const AdminContextProvider = (props: FCProps) => {
     const uploadedVideos = response.files.filter((file: IImage | IVideo) =>
       file.title.match(/mov|mp4|mpeg4|wmv|flv|avi/i)
     )
+
+    if (uploadedVideos.length) {
+      for (const video of uploadedVideos) {
+        const signedUrl = await API.getSignedVideoUrl(video.title)
+        video.signedUrl = signedUrl
+      }
+    }
+
     const uploadedImages = response.files.filter((file: IImage | IVideo) =>
       file.title.match(/jpeg|jpg|png|gif/i)
     )
