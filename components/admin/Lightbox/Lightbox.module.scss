@@ -1,4 +1,4 @@
-@import '../../../../styles/variables.scss';
+@import '../../../styles/variables.scss';
 
 .lightbox {
   align-items: center;
@@ -17,6 +17,7 @@
 
   .infoBox {
     padding-left: 10rem;
+    word-wrap: break-word;
     z-index: 100;
 
     h2 {

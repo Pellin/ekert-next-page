@@ -3,7 +3,8 @@ import ImageSection from '../ImageSection'
 import ProjectSection from '../ProjectSection'
 import UploadSection from '../UploadSection/UploadSection'
 import VideoSection from '../VideoSection'
-import Lightbox from '../ImageSection/Lightbox'
+import Lightbox from '../Lightbox'
+
 import styles from './AdminContent.module.scss'
 
 const AdminContent = () => {

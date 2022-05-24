@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, useContext, useEffect, useState } from 'react'
 import Image from 'next/image'
-import { AdminContext } from '../../../../contexts/admin/AdminContext'
-import { IImage, IProject, IVideo } from '../../../../globalTypes'
+import { AdminContext } from '../../../contexts/admin/AdminContext'
+import { IImage, IVideo, IProject } from '../../../globalTypes'
 import styles from './Lightbox.module.scss'
 
 const Lightbox = () => {
