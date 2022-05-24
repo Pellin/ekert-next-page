@@ -6,6 +6,7 @@ const projectSchema = new Schema({
   images: [String],
   videos: [String],
   slug: String,
+  password: String,
 })
 
 export default mongoose.models.Project ||

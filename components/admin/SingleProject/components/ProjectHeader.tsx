@@ -1,17 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
+import { ProjectHeaderProps } from '../types.'
 import styles from '../SingleProject.module.scss'
-import { IProject } from '../../../../globalTypes'
-
-type ProjectHeaderProps = {
-  project: IProject
-  showAddContent: boolean
-  setShowAddContent: React.Dispatch<React.SetStateAction<boolean>>
-  showRemoveContent: boolean
-  setShowRemoveContent: React.Dispatch<React.SetStateAction<boolean>>
-  setSelectedToAdd: React.Dispatch<React.SetStateAction<string[]>>
-  setSelectedToRemove: React.Dispatch<React.SetStateAction<string[]>>
-}
 
 const ProjectHeader = ({
   project,

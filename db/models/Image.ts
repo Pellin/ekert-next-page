@@ -14,6 +14,7 @@ export const imageSchema = new Schema({
     type: String,
   },
   size: Number,
+  public: Boolean,
 })
 
 export default mongoose.models.Image || mongoose.model('Image', imageSchema)

@@ -11,11 +11,13 @@ const Lightbox = () => {
     currentFile,
     showLightbox,
     setShowLightbox,
+    toggleFilePublic,
   } = useContext(AdminContext)!
   const [associatedProjects, setAssociatedProjects] = useState<IProject[]>([])
   const [naturalHeight, setNaturalHeight] = useState(400)
   const [naturalWidth, setNaturalWidth] = useState(400)
   const [isLandscape, setIsLandscape] = useState(false)
+  const [isUpdating, setIsUpdating] = useState(false)
 
   useEffect(() => {
     setAssociatedProjects(
@@ -54,6 +56,14 @@ const Lightbox = () => {
     }
   }
 
+  const handleTogglePublic = async () => {
+    setIsUpdating(true)
+
+    await toggleFilePublic(currentFile)
+
+    setIsUpdating(false)
+  }
+
   return (
     <div className={showLightbox ? styles.lightbox : styles.hidden}>
       <aside className={styles.infoBox}>
@@ -66,7 +76,11 @@ const Lightbox = () => {
               <li className={styles.projectRow} key={project._id}>
                 <p>{project.title}</p>
                 <div
-                  onClick={() => handleRemoveFileFromProject(project._id!)}
+                  onClick={
+                    isUpdating
+                      ? () => {}
+                      : () => handleRemoveFileFromProject(project._id!)
+                  }
                   title="Ta bort från projekt"
                   className={styles.minusIconWrapper}
                 >
@@ -84,6 +98,24 @@ const Lightbox = () => {
         ) : (
           <p>Inga associerade projekt</p>
         )}
+        <div className={styles.actions}>
+          <div
+            className={styles.eyeIconWrapper}
+            onClick={handleTogglePublic}
+            title={currentFile.public ? 'Gör privat' : 'Gör offentlig'}
+          >
+            <Image
+              src={
+                currentFile.public
+                  ? '/icons/eye-open-icon-white.png'
+                  : '/icons/eye-closed-icon-white.png'
+              }
+              alt={currentFile.public ? 'Gör privat' : 'Gör offentlig'}
+              width={24}
+              height={20}
+            />
+          </div>
+        </div>
       </aside>
       {isImage ? (
         <div className={styles.imageContainer}>

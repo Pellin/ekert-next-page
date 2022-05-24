@@ -1,20 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import ProjectFileCard from './ProjectFileCard'
 import Button from '../../../ui/Button'
-import { FileType, IProject, IImage, IVideo } from '../../../../globalTypes'
+import { FileType } from '../../../../globalTypes'
+import { AddContentProps } from '../types.'
 import styles from '../SingleProject.module.scss'
-
-type AddContentProps = {
-  images: IImage[]
-  videos: IVideo[]
-  project: IProject
-  addFiles: (images: string[], videos: string[]) => void
-  selectedFiles: string[]
-  setSelectedFiles: React.Dispatch<React.SetStateAction<string[]>>
-  showAddContent: boolean
-  setShowAddContent: React.Dispatch<React.SetStateAction<boolean>>
-}
 
 const AddContent = ({
   images,
@@ -46,10 +36,12 @@ const AddContent = ({
         {selectedFiles.length ? (
           <div className={styles.saveFilesWrapper}>
             <Button
+              backgroundColor="#65aa65"
+              color="#f5f5f5"
               onClick={handleAddFiles}
               title="Spara"
               text="Spara"
-              icon={{ name: 'circle-plus-icon.png', alt: 'Spara' }}
+              icon={{ name: 'circle-plus-icon-white.png', alt: 'Spara' }}
             />
           </div>
         ) : (
@@ -72,12 +64,12 @@ const AddContent = ({
       <div className={styles.imageList}>
         {images.map((image) => (
           <ProjectFileCard
-            selected={selectedFiles}
-            setSelected={setSelectedFiles}
-            add
             key={image._id}
             file={image}
             fileType={FileType.IMAGE}
+            selected={selectedFiles}
+            setSelected={setSelectedFiles}
+            add
             showAddContent={showAddContent}
           />
         ))}
@@ -85,12 +77,12 @@ const AddContent = ({
       <div className={styles.videoList}>
         {videos.map((video) => (
           <ProjectFileCard
-            selected={selectedFiles}
-            setSelected={setSelectedFiles}
-            add
             key={video._id}
             file={video}
             fileType={FileType.VIDEO}
+            selected={selectedFiles}
+            setSelected={setSelectedFiles}
+            add
             showAddContent={showAddContent}
           />
         ))}

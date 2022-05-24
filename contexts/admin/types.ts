@@ -18,6 +18,7 @@ export interface AdminContextInterface {
     images: IImage[],
     videos: IVideo[]
   ) => Promise<boolean>
+  toggleFilePublic: (file: IFile) => Promise<void>
   deleteImage: (title: string) => Promise<boolean>
   setImages: React.Dispatch<React.SetStateAction<IImage[]>>
   setVideos: React.Dispatch<React.SetStateAction<IVideo[]>>
@@ -43,4 +44,8 @@ export type ProjectUpdate = {
   description?: string
   isProtected?: boolean
   password?: string
+}
+
+export type FileUpdate = {
+  public: boolean
 }

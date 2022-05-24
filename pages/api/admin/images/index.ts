@@ -29,6 +29,19 @@ const handler: NextApiHandler = async (req, res) => {
         res.status(500).json({ message: 'Could not save image' })
       }
       break
+    case 'PUT':
+      try {
+        const updated = await Image.updateOne(
+          { _id: req.body.fileId },
+          req.body.update
+        )
+        res.status(200).json({ status: { success: updated.acknowledged } })
+      } catch (error) {
+        console.log(error)
+
+        res.status(500).json({ message: 'Could not update image' })
+      }
+      break
     case 'DELETE':
       try {
         const removedFromDB = await Image.deleteOne({ title: req.body.title })

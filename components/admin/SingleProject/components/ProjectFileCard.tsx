@@ -1,19 +1,8 @@
 import React, { ReducerWithoutAction, useEffect, useReducer } from 'react'
 import Image from 'next/image'
-import SelectIcon from './icons/SelectIcon'
-import { IFile, FileType } from '../../../../globalTypes'
+import { FileType } from '../../../../globalTypes'
+import { ProjectFileCardProps } from '../types.'
 import styles from '../SingleProject.module.scss'
-
-type ProjectFileCardProps = {
-  add?: boolean
-  disable?: boolean
-  file: IFile
-  fileType: FileType
-  selected?: string[]
-  setSelected?: React.Dispatch<React.SetStateAction<string[]>>
-  showRemoveContent?: boolean
-  showAddContent?: boolean
-}
 
 const ProjectFileCard = ({
   file,
@@ -57,27 +46,38 @@ const ProjectFileCard = ({
       key={file._id}
       className={`${
         FileType.IMAGE ? styles.imageWrapper : styles.videoWrapper
-      } ${isSelected && styles.selected}`}
+      } ${
+        isSelected &&
+        (showAddContent ? styles.selectedToAdd : styles.selectedToRemove)
+      } ${(showAddContent || showRemoveContent) && styles.selectable}`}
     >
       {fileType === FileType.IMAGE && (
-        <Image
-          draggable={false}
-          src={file.url}
-          alt={file.title}
-          width="100%"
-          height="100%"
-          layout="responsive"
-          objectFit="contain"
-        />
+        <div
+          onClick={
+            showAddContent || showRemoveContent ? handleSelected : () => {}
+          }
+        >
+          <Image
+            draggable={false}
+            src={file.url}
+            alt={file.title}
+            width="100%"
+            height="100%"
+            layout="responsive"
+            objectFit="contain"
+          />
+        </div>
       )}
       {fileType === FileType.VIDEO && (
-        <div className={styles.videoWrapper}>
+        <div
+          onClick={
+            showAddContent || showRemoveContent ? handleSelected : () => {}
+          }
+          className={styles.videoWrapper}
+        >
           {/*// @ts-ignore */}
           <video src={file.signedUrl} />
         </div>
-      )}
-      {(showRemoveContent || showAddContent) && (
-        <SelectIcon handleSelected={handleSelected} isSelected={isSelected} />
       )}
     </li>
   )

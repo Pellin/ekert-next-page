@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
-import { IImage, IProject, IVideo } from '../../globalTypes'
-import { EmptyProjectPayload, ProjectUpdate } from './types'
+import { FileType, IFile, IImage, IProject, IVideo } from '../../globalTypes'
+import { EmptyProjectPayload, FileUpdate, ProjectUpdate } from './types'
 
 export const getProjectsFromDB = async () => {
   try {
@@ -20,6 +20,24 @@ export const saveProjectToDB = async (payload: EmptyProjectPayload) => {
   })
 
   return response.data
+}
+
+export const updateFileInDB = async (
+  fileId: string,
+  fileType: FileType,
+  update: FileUpdate
+) => {
+  if (fileType === FileType.IMAGE) {
+    const response = await axios.put('/api/admin/images', {
+      fileId,
+      update,
+    })
+  } else if (fileType === FileType.VIDEO) {
+    const response = await axios.put('/api/admin/videos', {
+      fileId,
+      update,
+    })
+  }
 }
 
 export const updateProjectInDB = async (

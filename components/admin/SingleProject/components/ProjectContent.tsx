@@ -1,41 +1,55 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import Image from 'next/image'
-import ProjectFileCard from './ProjectFileCard'
+import { AdminContext } from '../../../../contexts/admin/AdminContext'
 import Button from '../../../ui/Button'
-import { IImage, IVideo, FileType } from '../../../../globalTypes'
+import ProjectFileCard from './ProjectFileCard'
+import { FileType } from '../../../../globalTypes'
+import { ProjectContentProps } from '../types.'
 import styles from '../SingleProject.module.scss'
 
-type ProjectContentProps = {
-  disable: boolean
-  images: IImage[]
-  videos: IVideo[]
-  showRemoveContent?: boolean
-  setShowRemoveContent: React.Dispatch<React.SetStateAction<boolean>>
-  selectedFiles: string[]
-  setSelectedFiles: React.Dispatch<React.SetStateAction<string[]>>
-}
-
 const ProjectContent = ({
+  project,
   disable,
   images,
   videos,
+  setProjectImages,
+  setProjectVideos,
   showRemoveContent,
   setShowRemoveContent,
   selectedFiles,
   setSelectedFiles,
 }: ProjectContentProps) => {
-  const handleRemoveFiles = () => {
-    const selectedImages = images
-      .filter((image) => selectedFiles.includes(image._id!))
-      .map((image) => image._id!)
-    const selectedVideos = videos
-      .filter((video) => selectedFiles.includes(video._id!))
-      .map((video) => video._id!)
+  const { removeFilesFromProject } = useContext(AdminContext)!
 
-    console.log(selectedImages)
-    console.log(selectedVideos)
+  const handleRemoveFiles = async () => {
+    const selectedImages = images.filter((image) =>
+      selectedFiles.includes(image._id!)
+    )
 
-    // addFiles(selectedImages, selectedVideos)
+    const selectedVideos = videos.filter((video) =>
+      selectedFiles.includes(video._id!)
+    )
+
+    await removeFilesFromProject(project._id!, selectedImages, selectedVideos)
+
+    setProjectImages((prev) => [
+      ...prev.filter(
+        (projectImage) =>
+          !selectedImages
+            .map((selectedImage) => selectedImage._id!)
+            .includes(projectImage._id!)
+      ),
+    ])
+    setProjectVideos((prev) => [
+      ...prev.filter(
+        (projectVideo) =>
+          !selectedVideos
+            .map((selectedVideo) => selectedVideo._id!)
+            .includes(projectVideo._id!)
+      ),
+    ])
+    setSelectedFiles([])
+    setShowRemoveContent(false)
   }
 
   const handleClose = () => {
@@ -52,10 +66,12 @@ const ProjectContent = ({
           {selectedFiles.length ? (
             <div className={styles.saveFilesWrapper}>
               <Button
+                backgroundColor="#F78C79"
+                color="#f5f5f5"
                 onClick={handleRemoveFiles}
                 title="Ta bort filer"
                 text="Ta bort filer"
-                icon={{ name: 'trash-icon.png', alt: 'Släng' }}
+                icon={{ name: 'trash-icon-white.png', alt: 'Släng' }}
               />
             </div>
           ) : (

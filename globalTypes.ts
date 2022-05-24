@@ -10,6 +10,7 @@ export interface IImage {
   url: string
   thumbnail: string
   size: number
+  public: boolean
 }
 export interface IVideo {
   _id?: string
@@ -17,6 +18,7 @@ export interface IVideo {
   url: string
   size: number
   signedUrl?: string
+  public: boolean
 }
 
 export interface IProject {

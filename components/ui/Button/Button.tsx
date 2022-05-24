@@ -12,6 +12,8 @@ type ButtonProps = {
       }
     | false
   type?: string
+  color?: string
+  backgroundColor?: string
   disabled?: boolean
   title: string
   text: string
@@ -21,6 +23,8 @@ type ButtonProps = {
 const Button = ({
   icon,
   type,
+  color,
+  backgroundColor,
   title,
   text,
   disabled,
@@ -33,6 +37,9 @@ const Button = ({
       title={title}
       onClick={onClick ? onClick : () => {}}
       className={`${styles.button} ${disabled ? styles.disabled : null}`}
+      style={
+        color ? { backgroundColor, color, borderColor: 'transparent' } : {}
+      }
     >
       {icon && (
         <div className={styles.icon}>

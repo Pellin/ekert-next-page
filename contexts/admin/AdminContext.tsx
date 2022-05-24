@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import * as API from './api'
-import { FCProps, IImage, IProject, IFile, IVideo } from '../../globalTypes'
+import {
+  FCProps,
+  IImage,
+  IProject,
+  IFile,
+  IVideo,
+  FileType,
+} from '../../globalTypes'
 import { AdminContextInterface, EmptyProjectPayload } from './types'
 
 export const AdminContext = React.createContext<AdminContextInterface | null>(
@@ -146,6 +153,25 @@ const AdminContextProvider = (props: FCProps) => {
     return success
   }
 
+  const toggleFilePublic = async (file: IFile) => {
+    if (file.public) {
+      file.public = false
+    } else {
+      file.public = true
+    }
+
+    // @ts-ignore
+    if (file.signedUrl) {
+      await API.updateFileInDB(file._id!, FileType.VIDEO, {
+        public: file.public,
+      })
+    } else {
+      await API.updateFileInDB(file._id!, FileType.IMAGE, {
+        public: file.public,
+      })
+    }
+  }
+
   const deleteImage = async (title: string): Promise<boolean> => {
     try {
       await API.deleteImage(title)
@@ -171,6 +197,7 @@ const AdminContextProvider = (props: FCProps) => {
     createEmptyProject,
     addFilesToProject,
     removeFilesFromProject,
+    toggleFilePublic,
     deleteImage,
     setImages,
     setVideos,

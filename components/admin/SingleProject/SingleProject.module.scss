@@ -91,8 +91,16 @@
         flex-direction: column;
         position: relative;
 
-        &.selected {
-          border: 1px solid $green;
+        &.selectable {
+          cursor: pointer;
+        }
+
+        &.selectedToAdd {
+          border: 5px solid $green;
+        }
+
+        &.selectedToRemove {
+          border: 5px solid $red;
         }
 
         .deleteIconWrapper, .addOrCancelIconWrapper {

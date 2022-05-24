@@ -46,8 +46,7 @@ const SingleProject = ({ project }: { project: IProject }) => {
       ...prev.filter((video) => !videoIds.includes(video._id!)),
     ])
 
-    const success = await addFilesToProject(project._id!, imageIds, videoIds)
-    console.log(success)
+    await addFilesToProject(project._id!, imageIds, videoIds)
 
     setShowAddContent(false)
   }
@@ -77,10 +76,13 @@ const SingleProject = ({ project }: { project: IProject }) => {
         />
       )}
       <ProjectContent
+        project={project}
         disable={showAddContent}
         images={projectImages}
-        showRemoveContent={showRemoveContent}
         videos={projectVideos}
+        setProjectImages={setProjectImages}
+        setProjectVideos={setProjectVideos}
+        showRemoveContent={showRemoveContent}
         setShowRemoveContent={setShowRemoveContent}
         selectedFiles={selectedToRemove}
         setSelectedFiles={setSelectedToRemove}
