@@ -10,7 +10,6 @@ const PublicImages = ({ images }: { images: IImage[] }) => {
   }
   return (
     <div className={styles.mainContainer}>
-      <h1>Fotografi</h1>
       <ul className={styles.imageList}>
         {images.map((image) => (
           <PublicImage key={image._id} image={image} />
