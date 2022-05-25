@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from '../Header'
+import Footer from '../Footer'
 import styles from './Layout.module.scss'
 
 const Layout = (props: { children: React.ReactNode }) => {
@@ -7,6 +8,7 @@ const Layout = (props: { children: React.ReactNode }) => {
     <>
       <Header />
       <main className={styles.layout}>{props.children}</main>
+      <Footer />
     </>
   )
 }
