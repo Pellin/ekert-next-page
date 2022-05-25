@@ -23,21 +23,69 @@
   .innerWrapper {
     align-items: baseline;
     display: flex;
+    justify-content: space-between;
     max-width: 1200px;
     min-width: $desktop-min-width;
     margin: auto;
-    
-    .imageWrapper {
-      cursor: pointer;
-      height: 3rem;
-      width: 3rem;
-      margin-right: 1.6rem;
-    }
 
-    p {
-      color: $green;
-      font-size: 2rem;
-      margin-left: 0.8rem;
+    .logoAndTitle {
+      align-items: baseline;
+      display: flex;
+   
+      .imageWrapper {
+        cursor: pointer;
+        height: 3rem;
+        width: 3rem;
+        margin-right: 1.6rem;
+      }
+  
+      p {
+        color: $green;
+        font-size: 2rem;
+        margin-left: 0.8rem;
+      }
+    }
+    
+    nav {
+      .menu {
+        display: flex;
+        list-style: none;
+        padding: 0;
+
+        li {
+          align-items: center;
+          display: flex;
+          justify-content: flex-end;
+          margin-left: 1rem;
+          min-width: 8rem;
+          
+          a {
+            text-decoration: none;
+
+            &.active {
+            
+              p {
+                color: $black;
+                font-size: 1.7rem;
+              }
+            }
+
+            p {
+              color: $off-black;
+              cursor: pointer;
+            }
+            
+            &:hover { 
+              p {
+                color: $black;
+              }
+            }
+  
+          }
+         
+        }
+      }
     }
   }
+
 }

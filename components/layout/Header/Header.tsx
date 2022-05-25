@@ -5,11 +5,10 @@ import Link from 'next/link'
 import styles from './Header.module.scss'
 
 const Header = () => {
+  const router = useRouter()
   const [headerUp, setHeaderUp] = useState(false)
   const [currentPosition, setCurrentPosition] = useState(0)
   const [page, setPage] = useState('')
-
-  const router = useRouter()
 
   useEffect(() => {
     setPage(router.pathname.slice(1))
@@ -42,19 +41,56 @@ const Header = () => {
   return (
     <header className={`${styles.header} ${headerUp && styles.navUp}`}>
       <div className={styles.innerWrapper}>
-        <Link href="/">
-          <div className={styles.imageWrapper}>
-            <Image
-              className={styles.logo}
-              src={'/images/ae-logo.png'}
-              alt="Anders Ekert"
-              width={100}
-              height={100}
-            />
-          </div>
-        </Link>
-        <h1>ANDERS EKERT PRODUKTION</h1>
-        <p>{page.toUpperCase()}</p>
+        <div className={styles.logoAndTitle}>
+          <Link href="/">
+            <div className={styles.imageWrapper}>
+              <Image
+                className={styles.logo}
+                src={'/images/ae-logo.png'}
+                alt="Anders Ekert"
+                width={100}
+                height={100}
+              />
+            </div>
+          </Link>
+          <h1>ANDERS EKERT PRODUKTION</h1>
+          <p>{page.toUpperCase()}</p>
+        </div>
+        <nav>
+          <ul className={styles.menu}>
+            <li>
+              <Link href="/fotografi">
+                <a
+                  className={
+                    router.pathname === '/fotografi' ? styles.active : ''
+                  }
+                >
+                  <p>Fotografi</p>
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/video">
+                <a
+                  className={router.pathname === '/video' ? styles.active : ''}
+                >
+                  <p>Video</p>
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/projekt">
+                <a
+                  className={
+                    router.pathname === '/projekt' ? styles.active : ''
+                  }
+                >
+                  <p>Projekt</p>
+                </a>
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </div>
     </header>
   )
