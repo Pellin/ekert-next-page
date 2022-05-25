@@ -15,6 +15,9 @@ const SingleProject = ({ project }: { project: IProject }) => {
   const [selectedToRemove, setSelectedToRemove] = useState<string[]>([])
   const [projectImages, setProjectImages] = useState<IImage[]>([])
   const [projectVideos, setProjectVideos] = useState<IVideo[]>([])
+  const [isEmpty, setIsEmpty] = useState(
+    !project.videos.length && !project.images.length
+  )
   const [unselectedImages, setUnselectedImages] = useState<IImage[]>([])
   const [unselectedVideos, setUnselectedVideos] = useState<IVideo[]>([])
 
@@ -32,6 +35,14 @@ const SingleProject = ({ project }: { project: IProject }) => {
       videos.filter((video) => !project.videos.includes(video._id!))
     )
   }, [project, images, videos])
+
+  useEffect(() => {
+    if (!projectVideos.length && !projectImages.length) {
+      setIsEmpty(true)
+    } else {
+      setIsEmpty(false)
+    }
+  }, [projectVideos, projectImages])
 
   const handleAddFiles = async (imageIds: string[], videoIds: string[]) => {
     const addedImages = images.filter((image) => imageIds.includes(image._id!))
@@ -78,6 +89,7 @@ const SingleProject = ({ project }: { project: IProject }) => {
       <ProjectContent
         project={project}
         disable={showAddContent}
+        isEmpty={isEmpty}
         images={projectImages}
         videos={projectVideos}
         setProjectImages={setProjectImages}

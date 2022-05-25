@@ -46,3 +46,8 @@ export enum FileType {
   IMAGE,
   VIDEO,
 }
+
+export type MultipleProjectsProps = {
+  projects: IProject[]
+  images: IImage[]
+}

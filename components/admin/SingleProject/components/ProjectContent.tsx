@@ -10,6 +10,7 @@ import styles from '../SingleProject.module.scss'
 const ProjectContent = ({
   project,
   disable,
+  isEmpty,
   images,
   videos,
   setProjectImages,
@@ -59,7 +60,9 @@ const ProjectContent = ({
 
   return (
     <section
-      className={`${styles.contentWrapper} ${disable && styles.disabled}`}
+      className={`${styles.contentWrapper} ${disable && styles.disabled} ${
+        isEmpty && styles.isEmpty
+      }`}
     >
       {showRemoveContent && (
         <div className={styles.removeContentHeader}>
@@ -92,32 +95,51 @@ const ProjectContent = ({
           </div>
         </div>
       )}
-      <ul className={styles.imageList}>
-        {images.map((image) => (
-          <ProjectFileCard
-            fileType={FileType.IMAGE}
-            disable={disable}
-            key={image._id}
-            file={image}
-            showRemoveContent={showRemoveContent!}
-            selected={selectedFiles}
-            setSelected={setSelectedFiles}
-          />
-        ))}
-      </ul>
-      <ul className={styles.videoList}>
-        {videos.map((video) => (
-          <ProjectFileCard
-            fileType={FileType.VIDEO}
-            disable={disable}
-            key={video._id}
-            file={video}
-            showRemoveContent={showRemoveContent!}
-            selected={selectedFiles}
-            setSelected={setSelectedFiles}
-          />
-        ))}
-      </ul>
+      {isEmpty ? (
+        <p>
+          Det här projektet är tomt. Tryck på{' '}
+          <span>
+            <Image
+              src="/icons/circle-plus-icon.png"
+              alt="Plustecken"
+              height={20}
+              width={20}
+              layout="responsive"
+              objectFit="contain"
+            />
+          </span>{' '}
+          i menyn för att lägga till bilder eller videor.
+        </p>
+      ) : (
+        <>
+          <ul className={styles.imageList}>
+            {images.map((image) => (
+              <ProjectFileCard
+                fileType={FileType.IMAGE}
+                disable={disable}
+                key={image._id}
+                file={image}
+                showRemoveContent={showRemoveContent!}
+                selected={selectedFiles}
+                setSelected={setSelectedFiles}
+              />
+            ))}
+          </ul>
+          <ul className={styles.videoList}>
+            {videos.map((video) => (
+              <ProjectFileCard
+                fileType={FileType.VIDEO}
+                disable={disable}
+                key={video._id}
+                file={video}
+                showRemoveContent={showRemoveContent!}
+                selected={selectedFiles}
+                setSelected={setSelectedFiles}
+              />
+            ))}
+          </ul>
+        </>
+      )}
     </section>
   )
 }

@@ -14,6 +14,7 @@ export type AddContentProps = {
 export type ProjectContentProps = {
   project: IProject
   disable: boolean
+  isEmpty: boolean
   images: IImage[]
   videos: IVideo[]
   setProjectImages: React.Dispatch<React.SetStateAction<IImage[]>>
