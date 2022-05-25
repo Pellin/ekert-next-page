@@ -3,6 +3,7 @@ import Image from 'next/image'
 import styles from './MainContent.module.scss'
 import Section from './components/Section'
 import ClientSection from '../ClientSection'
+import ProjectSection from '../ProjectSection'
 
 const MainContent = () => {
   return (
@@ -26,6 +27,7 @@ const MainContent = () => {
         </video>
       </Section>
       <ClientSection />
+      <ProjectSection />
     </div>
   )
 }

@@ -1,0 +1,66 @@
+@import '../../../styles/variables.scss';
+
+.projectSection {
+  align-items: center;
+  background-color: $white;
+  display: flex;
+  flex-direction: column;
+  padding: 5rem 0 10rem;
+
+  h2 {
+    font-size: 5rem;
+  }
+
+  .projectGrid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    list-style: none;
+    padding: 0;
+    width: 95%;
+  
+    .projectCard {
+      box-shadow: 0 1px 8px $shadow;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      transition: all 1.2s;
+
+      &:hover {
+        transform: scale(1.01);
+      }
+
+      .cardImageWrapper {
+        height: auto;
+        position: relative;
+        width: 100%;
+
+        .gradient {
+          background: linear-gradient(transparent, #111 120%);
+          bottom: 0;
+          height: 100%;
+          left: 0;
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 100%;
+        }
+      }
+
+      h3 {
+        bottom: 1rem;
+        color: $off-white;
+        font-size: 2.6rem;
+        opacity: 0.9;
+        position: absolute;
+        text-align: center;
+        z-index: 50;
+
+        &:hover {
+          color: $white;
+        }
+      }
+    }
+  }
+}
