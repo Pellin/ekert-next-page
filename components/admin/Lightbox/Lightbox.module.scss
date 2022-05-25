@@ -73,10 +73,11 @@
 
   .imageContainer, .videoContainer {
     display: grid;
+    grid-template-rows: 100%;
     place-items: center;
-
+    
     .imageWrapper {
-      align-self: center;
+      max-height: 100%;
       object-fit: none;
       z-index: 100;
     }
@@ -89,7 +90,7 @@
 
   .iconWrapper {
     cursor: pointer;
-    height: 2rem;
+    max-height: 2rem;
     position: absolute;
     right: 2rem;
     top: 2rem;

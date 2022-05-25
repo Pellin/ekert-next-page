@@ -118,7 +118,7 @@ const Lightbox = () => {
         </div>
       </aside>
       {isImage ? (
-        <div className={styles.imageContainer}>
+        <article className={styles.imageContainer}>
           <div
             className={styles.imageWrapper}
             style={isLandscape ? { width: '75%' } : { width: '50%' }}
@@ -132,7 +132,7 @@ const Lightbox = () => {
               width={naturalWidth}
             />
           </div>
-        </div>
+        </article>
       ) : (
         <div className={styles.videoContainer}>
           {/*// @ts-ignore */}

@@ -16,9 +16,10 @@
     
     .cardHeader {
       align-items: center;
+      background-color: $white;
       display: flex;
       justify-content: space-between;
-      background-color: $white;
+      max-height: 4rem;
       padding: 1rem;
 
       p {
