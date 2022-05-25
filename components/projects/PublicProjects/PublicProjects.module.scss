@@ -1,0 +1,62 @@
+@import '../../../styles/variables.scss';
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin: 0;
+
+  .projectList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 50%);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    .projectWrapper {
+      background-color: white;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      cursor: pointer;
+      display: flex;
+      padding: 1rem;
+      position: relative;
+      width: 100%;
+      height: 50rem;
+      transition: all 1s;
+
+      &:hover {
+        opacity: 0.9;
+      }
+
+      .titleAndDescription {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        h2 {
+          font-size: 5rem;
+          opacity: 0.9;
+          text-shadow: 0 1px 2px $shadow;
+        }
+
+        h2, p {
+          color: $off-white;
+          z-index: 2;
+        }
+      }
+
+      .gradient {
+        background: linear-gradient(transparent 50%, $black 140%);
+        bottom: 0;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+      }
+    }
+  }
+}
