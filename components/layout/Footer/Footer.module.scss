@@ -5,11 +5,12 @@
   background-color: $off-black;
   display: flex;
   justify-content: space-around;
-  min-height: 30rem;
+  margin-top: auto;
+  min-height: 24rem;
 
   .logoWrapper {
-    height: 30rem;
-    width: 30rem;
+    height: 24rem;
+    width: 24rem;
   }
   
   .adressBox {
@@ -17,18 +18,18 @@
     font-style: normal;
     display: flex;
     flex-direction: column;
-    height: 30rem;
+    height: 24rem;
     justify-content: space-around;
     padding: 3rem 0 1rem;
 
     h3 {
       color: $off-white;
-      font-size: 5rem;
+      font-size: 3.6rem;
     }
 
     p, a {
       color: $off-white;
-      font-size: 2.6rem;
+      font-size: 2rem;
       text-decoration: none;
     }
 
@@ -37,11 +38,11 @@
     }
 
     .phone {
-      font-size: 3.2rem;
+      font-size: 2.4rem;
     }
 
     .copyright {
-      font-size: 2rem;
+      font-size: 1.6rem;
       margin-top: auto;
     }
   }
