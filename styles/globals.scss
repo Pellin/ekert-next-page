@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300&family=Roboto:wght@400;500;700&display=swap');
 @import './variables.scss';
 
+
 html,
 body {
   background-color: $off-white;
@@ -8,7 +9,6 @@ body {
   cursor: default;
   font-family: 'Roboto', sans-serif;
   font-size: 62.5%;
-  -ms-overflow-style: none;
   padding: 0;
   margin: 0;
 
@@ -58,6 +58,17 @@ body {
     resize: none;
   }
 }
+
+#__next {
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+
+  div {
+    height: 100%;
+  }
+}
+
 
 * {
   box-sizing: border-box;

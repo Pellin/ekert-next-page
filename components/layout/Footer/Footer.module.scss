@@ -1,0 +1,48 @@
+@import '../../../styles/variables.scss';
+
+.footer {
+  align-items: center;
+  background-color: $off-black;
+  display: flex;
+  justify-content: space-around;
+  min-height: 30rem;
+
+  .logoWrapper {
+    height: 30rem;
+    width: 30rem;
+  }
+  
+  .adressBox {
+    color: $off-white;
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    height: 30rem;
+    justify-content: space-around;
+    padding: 3rem 0 1rem;
+
+    h3 {
+      color: $off-white;
+      font-size: 5rem;
+    }
+
+    p, a {
+      color: $off-white;
+      font-size: 2.6rem;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: $white;
+    }
+
+    .phone {
+      font-size: 3.2rem;
+    }
+
+    .copyright {
+      font-size: 2rem;
+      margin-top: auto;
+    }
+  }
+}
