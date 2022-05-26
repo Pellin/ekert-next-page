@@ -8,6 +8,11 @@ import ProjectSection from '../ProjectSection'
 const MainContent = () => {
   return (
     <div className={styles.mainContainer}>
+      <Section link="/video" title="VIDEO&gt;&gt;">
+        <video muted autoPlay loop onContextMenu={(e) => e.preventDefault()}>
+          <source src="/videos/sot.mp4" />
+        </video>
+      </Section>
       <Section link="/fotografi" title="FOTOGRAFI&gt;&gt;">
         <div className={styles.imageWrapper}>
           <Image
@@ -20,11 +25,6 @@ const MainContent = () => {
             onContextMenu={(e) => e.preventDefault()}
           />
         </div>
-      </Section>
-      <Section link="/video" title="VIDEO&gt;&gt;">
-        <video muted autoPlay loop onContextMenu={(e) => e.preventDefault()}>
-          <source src="/videos/sot.mp4" />
-        </video>
       </Section>
       <ClientSection />
       <ProjectSection />
