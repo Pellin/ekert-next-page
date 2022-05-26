@@ -16,8 +16,8 @@ export const getStaticProps: GetStaticProps = async () => {
   const images = JSON.parse(JSON.stringify(ImageResponse)) as IImage[]
   return {
     props: {
-      projects,
-      images,
+      projects: projects.filter((project) => !project.isProtected),
+      images: images.filter((image) => image.public),
     },
   }
 }

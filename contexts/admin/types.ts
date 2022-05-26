@@ -7,7 +7,9 @@ export interface AdminContextInterface {
   uploadFiles: (
     inputElement: React.RefObject<HTMLInputElement>
   ) => Promise<boolean>
-  createEmptyProject: (payload: EmptyProjectPayload) => Promise<void>
+  createEmptyProject: (
+    payload: EmptyProjectPayload
+  ) => Promise<{ project: IProject; password: string }>
   addFilesToProject: (
     projectId: string,
     images: string[],
@@ -17,6 +19,15 @@ export interface AdminContextInterface {
     projectId: string,
     images: IImage[],
     videos: IVideo[]
+  ) => Promise<boolean>
+  updateProjectTitle: (
+    projectId: string,
+    newTitle: string,
+    newSlug: string
+  ) => Promise<boolean>
+  updateProjectDescription: (
+    projectId: string,
+    newDescription: string
   ) => Promise<boolean>
   toggleFilePublic: (file: IFile) => Promise<void>
   deleteImage: (title: string) => Promise<boolean>

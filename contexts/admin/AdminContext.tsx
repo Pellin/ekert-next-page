@@ -58,8 +58,11 @@ const AdminContextProvider = (props: FCProps) => {
 
   const createEmptyProject = async (payload: EmptyProjectPayload) => {
     try {
-      const savedProject = await API.saveProjectToDB(payload)
-      setProjects((prev) => [...prev, savedProject])
+      const response = await API.saveProjectToDB(payload)
+
+      setProjects((prev) => [...prev, response.project])
+
+      return response
     } catch (error) {
       console.log(error)
     }
@@ -119,6 +122,43 @@ const AdminContextProvider = (props: FCProps) => {
     const success = await API.updateProjectInDB(projectId, {
       images: project.images,
       videos: project.videos,
+    })
+
+    return success
+  }
+
+  const updateProjectTitle = async (
+    projectId: string,
+    newTitle: string,
+    newSlug: string
+  ) => {
+    const project = projects.find((proj) => proj._id === projectId)
+
+    if (!project) return false
+
+    project.title = newTitle
+    project.slug = newSlug
+
+    const success = await API.updateProjectInDB(projectId, {
+      title: newTitle,
+      slug: newSlug,
+    })
+
+    return success
+  }
+
+  const updateProjectDescription = async (
+    projectId: string,
+    newDescription: string
+  ) => {
+    const project = projects.find((proj) => proj._id === projectId)
+
+    if (!project) return false
+
+    project.description = newDescription
+
+    const success = await API.updateProjectInDB(projectId, {
+      description: newDescription,
     })
 
     return success
@@ -195,6 +235,8 @@ const AdminContextProvider = (props: FCProps) => {
     projects,
     uploadFiles,
     createEmptyProject,
+    updateProjectTitle,
+    updateProjectDescription,
     addFilesToProject,
     removeFilesFromProject,
     toggleFilePublic,

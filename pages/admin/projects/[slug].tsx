@@ -17,7 +17,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   await connect()
 
   const project = (await Project.findOne({
-    _id: context.params!.projectId,
+    slug: context.params!.slug,
   })) as IProject
 
   return {
