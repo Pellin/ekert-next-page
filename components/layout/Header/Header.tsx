@@ -11,7 +11,9 @@ const Header = () => {
   const [page, setPage] = useState('')
 
   useEffect(() => {
-    setPage(router.pathname.slice(1))
+    const pathParams = router.asPath.split('/').slice(1)
+
+    setPage(pathParams[0])
   }, [router])
 
   useEffect(() => {
@@ -59,6 +61,15 @@ const Header = () => {
         <nav>
           <ul className={styles.menu}>
             <li>
+              <Link href="/video">
+                <a
+                  className={router.pathname === '/video' ? styles.active : ''}
+                >
+                  <p>Video</p>
+                </a>
+              </Link>
+            </li>
+            <li>
               <Link href="/fotografi">
                 <a
                   className={
@@ -66,15 +77,6 @@ const Header = () => {
                   }
                 >
                   <p>Fotografi</p>
-                </a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/video">
-                <a
-                  className={router.pathname === '/video' ? styles.active : ''}
-                >
-                  <p>Video</p>
                 </a>
               </Link>
             </li>
