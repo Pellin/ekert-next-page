@@ -16,11 +16,17 @@
     justify-content: space-between;
     padding: 1rem 2rem;
 
+    .descriptionRow {
+      background-color: blue;
+      min-height: 10rem;
+    }
+
    .titleRow, .descriptionRow {
      align-items: baseline;
      display: flex;
      flex-direction: column;
      margin: 0.5rem 0;
+     width: 50rem;
 
      .titleAndEditIcon {
         align-items: center;
@@ -28,7 +34,7 @@
         display: flex;
         justify-content: space-between;
         padding: 0.5rem 1rem;
-        min-width: 38.8rem;
+        min-width: 100%;
 
         h2 {
           margin: 2px 0;
@@ -46,7 +52,7 @@
       background-color: $off-white;
       display: flex;
       justify-content: space-between;
-      min-width: 35rem;
+      min-width: 45rem;
       padding-right: 1rem;
       
       input {
@@ -57,7 +63,7 @@
         font-weight: 700;
         margin: 0.2rem 0;
         padding: 0.5rem 1rem;
-        min-width: 36.4rem;
+        min-width: 47.6rem;
       }
 
       .submitIconWrapper {
@@ -73,7 +79,13 @@
       display: flex;
       justify-content: space-between;
       padding: 0.5rem 1rem;
-      min-width: 38.8rem;
+      min-width: 100%;
+      min-height: 10rem;
+
+      p {
+        align-self: flex-start;
+        max-width: 80%;
+      }
 
       .editIconWrapper {
         cursor: pointer;
@@ -87,17 +99,19 @@
     background-color: $off-white;
     display: flex;
     justify-content: space-between;
-    min-width: 35rem;
+    min-width: 45rem;
     padding-right: 1rem;
     
-    input {
+    textarea {
       background-color: $off-white;
       color: $off-black;
       font-family: 'Roboto', sans-serif;
       font-size: 1.6rem;
-      margin: 0.5rem 0;
-      padding: 0.5rem 1rem;
-      min-width: 36.4rem;
+      resize: none;
+      min-height: 10rem;
+      margin: 0;
+      padding: 1rem 1rem;
+      min-width: 47.6rem;
     }
 
     .submitIconWrapper {

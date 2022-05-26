@@ -135,9 +135,8 @@ const ProjectHeader = ({
         {editDescriptionMode ? (
           <div className={styles.descriptionRow}>
             <div className={styles.descriptionAndSubmitIcon}>
-              <input
+              <textarea
                 autoFocus
-                type="text"
                 value={description}
                 onChange={(e) => setDescription(e.currentTarget.value)}
               />
