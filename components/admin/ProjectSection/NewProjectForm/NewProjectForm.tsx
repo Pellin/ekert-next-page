@@ -6,6 +6,9 @@ import styles from './NewProjectForm.module.scss'
 const NewProjectForm = () => {
   const { createEmptyProject } = useContext(AdminContext)!
   const [showForm, setShowForm] = useState(false)
+  const [showPasswordMessage, setShowPasswordMessage] = useState(false)
+  const [createdPassword, setCreatedPassword] = useState('')
+  const [createdProjectTitle, setCreatedProjectTitle] = useState('')
   const titleRef = useRef<HTMLInputElement>(null)
   const descriptionRef = useRef<HTMLTextAreaElement>(null)
   const [isProtected, setIsProtected] = useState(false)
@@ -14,15 +17,27 @@ const NewProjectForm = () => {
     e.preventDefault()
 
     if (titleRef.current && descriptionRef.current) {
-      await createEmptyProject({
+      const response = await createEmptyProject({
         title: titleRef.current.value,
         description: descriptionRef.current.value,
         isProtected,
       })
+
+      if (response.project.isProtected) {
+        setShowPasswordMessage(true)
+        setCreatedPassword(response.password)
+        setCreatedProjectTitle(response.project.title)
+      }
       titleRef.current.value = ''
       descriptionRef.current.value = ''
       setShowForm(false)
     }
+  }
+
+  const handleClosePasswordMessage = () => {
+    setShowPasswordMessage(false)
+    setCreatedPassword('')
+    setCreatedProjectTitle('')
   }
 
   return (
@@ -67,6 +82,16 @@ const NewProjectForm = () => {
             text="Skapa projekt"
           />
         </form>
+      )}
+      {showPasswordMessage && (
+        <div className={styles.passwordMessage}>
+          <p>
+            Projektet {createdProjectTitle} är lösenordsskyddat. Lösenordet är{' '}
+            <span>{createdPassword}</span>. Du kommer inte att kunna se
+            lösenordet igen när du stänger den här rutan.
+          </p>
+          <p onClick={handleClosePasswordMessage}>Klicka här för att stänga</p>
+        </div>
       )}
     </div>
   )

@@ -26,9 +26,26 @@
       flex: 1;
       justify-content: space-between;
 
-      h3 {
-       margin: 0;
+      .titleAndStatus {
+        align-items: center;
+        display: flex;
+
+        .statusWrapper {
+          align-items: center;
+          background-color: $white;
+          border-radius: 50%;
+          box-shadow: 0 1px 4px $shadow;
+          display: flex;
+          min-height: 3.2rem;
+          justify-content: center;
+          width: 3.2rem;
+        }
+
+        h3 {
+         margin: 0 1rem 0;
+        }
       }
+
       p {
         font-size: 1.2rem;
         margin: 0 1rem 0 0;

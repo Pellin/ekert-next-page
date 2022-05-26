@@ -7,6 +7,7 @@ const projectSchema = new Schema({
   videos: [String],
   slug: String,
   password: String,
+  isProtected: Boolean,
 })
 
 export default mongoose.models.Project ||

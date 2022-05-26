@@ -1,7 +1,10 @@
 import { NextApiHandler } from 'next'
 import Project from '../../../../db/models/Project'
 import connect from '../../../../db/connect'
+import { generatePassword } from '../../../../utils'
 import slug from 'slug'
+import { IProject } from '../../../../globalTypes'
+import { hashPassword } from '../../../../db/utils'
 
 const handler: NextApiHandler = async (req, res) => {
   await connect()
@@ -18,17 +21,30 @@ const handler: NextApiHandler = async (req, res) => {
       break
     case 'POST':
       try {
-        const project = {
+        const project: IProject = {
           title: req.body.title,
           description: req.body.description,
           images: [],
           videos: [],
           slug: slug(req.body.title),
+          isProtected: req.body.isProtected,
+        }
+
+        let password: string | undefined = undefined
+        let hashedPassword: string
+
+        if (project.isProtected) {
+          password = generatePassword(8)
+          hashedPassword = await hashPassword(password)
+          project.password = hashedPassword
         }
 
         const created = await Project.create(project)
 
-        res.status(201).json(created)
+        res.status(201).json({
+          project: created,
+          password,
+        })
       } catch (error) {
         console.log(error)
 
