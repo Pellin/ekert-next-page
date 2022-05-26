@@ -1,4 +1,5 @@
 import React, { SyntheticEvent, useContext, useRef, useState } from 'react'
+import Image from 'next/image'
 import { AdminContext } from '../../../../contexts/admin/AdminContext'
 import Button from '../../../ui/Button'
 import styles from './NewProjectForm.module.scss'
@@ -86,11 +87,24 @@ const NewProjectForm = () => {
       {showPasswordMessage && (
         <div className={styles.passwordMessage}>
           <p>
-            Projektet {createdProjectTitle} är lösenordsskyddat. Lösenordet är{' '}
-            <span>{createdPassword}</span>. Du kommer inte att kunna se
-            lösenordet igen när du stänger den här rutan.
+            Projektet <span>{createdProjectTitle}</span> är lösenordsskyddat.
+            Lösenordet är <span>{createdPassword}</span>. Du kommer inte att
+            kunna se lösenordet igen efter att du stängt den här rutan.
           </p>
-          <p onClick={handleClosePasswordMessage}>Klicka här för att stänga</p>
+          <div
+            title="Stäng"
+            onClick={handleClosePasswordMessage}
+            className={styles.closeIconWrapper}
+          >
+            <Image
+              src="/icons/close-icon-black.png"
+              alt="Stäng"
+              height={14}
+              width={14}
+              layout="responsive"
+              objectFit="contain"
+            />
+          </div>
         </div>
       )}
     </div>

@@ -1,3 +1,5 @@
+@import '../../../../styles/variables.scss';
+
 .formWrapper {
   .newProjectForm {
     padding: 1rem 0;
@@ -12,6 +14,29 @@
       align-items: center;
       display: flex;
       margin-bottom: 1rem;
+    }
+  }
+
+  .passwordMessage {
+    border: 1px solid $green;
+    margin-top: 1rem;
+    padding: 1rem;
+    position: relative;
+
+    p {
+      max-width: 97%;;
+      span {
+        font-weight: 500;
+      }
+    }
+
+    .closeIconWrapper {
+      cursor: pointer;
+      height: 1rem;
+      width: 1rem;
+      position: absolute;
+      top: 0.8rem;
+      right: 0.8rem;
     }
   }
 }
