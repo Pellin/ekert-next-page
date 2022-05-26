@@ -8,11 +8,11 @@ const BackButton = () => {
   return (
     <Button
       onClick={() => router.back()}
-      title="Gå tillbaka"
-      text="Gå tillbaka"
+      title="Tillbaka"
+      text="Tillbaka"
       icon={{
         name: 'chevron-left-icon.png',
-        alt: 'Gå tillbaka',
+        alt: 'Tillbaka',
         height: 8,
         width: 6,
       }}
