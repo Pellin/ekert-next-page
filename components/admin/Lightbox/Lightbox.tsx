@@ -3,6 +3,29 @@ import Image from 'next/image'
 import { AdminContext } from '../../../contexts/admin/AdminContext'
 import { IImage, IVideo, IProject } from '../../../globalTypes'
 import styles from './Lightbox.module.scss'
+import Button from '../../ui/Button'
+
+const MessageModal = ({
+  message,
+  setShowProtectedMessage,
+  setProtectedMessage,
+}: {
+  message: string
+  setShowProtectedMessage: React.Dispatch<React.SetStateAction<boolean>>
+  setProtectedMessage: React.Dispatch<React.SetStateAction<string>>
+}) => {
+  const handleClose = () => {
+    setShowProtectedMessage(false)
+    setProtectedMessage('')
+  }
+
+  return (
+    <dialog className={styles.messageModal}>
+      <p>{message}</p>
+      <Button text="OK" title="OK" onClick={handleClose} />
+    </dialog>
+  )
+}
 
 const Lightbox = () => {
   const {
@@ -18,6 +41,8 @@ const Lightbox = () => {
   const [naturalWidth, setNaturalWidth] = useState(400)
   const [isLandscape, setIsLandscape] = useState(false)
   const [isUpdating, setIsUpdating] = useState(false)
+  const [protectedMessage, setProtectedMessage] = useState('')
+  const [showProtectedMessage, setShowProtectedMessage] = useState(false)
 
   useEffect(() => {
     setAssociatedProjects(
@@ -57,11 +82,38 @@ const Lightbox = () => {
   }
 
   const handleTogglePublic = async () => {
+    if (!currentFile.public) {
+      const protectedProjects: string[] = []
+      associatedProjects.forEach((project) => {
+        if (project.isProtected) {
+          protectedProjects.push(project.title)
+        }
+      })
+
+      if (protectedProjects.length) {
+        handleShowProtectedMessage(
+          `Den här filen är tillagd i ${protectedProjects.length} ${
+            protectedProjects.length === 1 ? 'skyddat' : 'skyddade'
+          } projekt. Du måste ta bort den från följande projekt för att kunna göra den publik:
+           ${protectedProjects.join(', ')}.`
+        )
+
+        return
+      }
+    }
+
     setIsUpdating(true)
 
     await toggleFilePublic(currentFile)
 
     setIsUpdating(false)
+  }
+
+  const handleShowProtectedMessage = (message: string) => {
+    console.log('running')
+
+    setProtectedMessage(message)
+    setShowProtectedMessage(true)
   }
 
   return (
@@ -150,6 +202,13 @@ const Lightbox = () => {
           width={20}
         />
       </div>
+      {showProtectedMessage && (
+        <MessageModal
+          setShowProtectedMessage={setShowProtectedMessage}
+          setProtectedMessage={setProtectedMessage}
+          message={protectedMessage}
+        />
+      )}
     </div>
   )
 }

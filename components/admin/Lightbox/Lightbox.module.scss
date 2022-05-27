@@ -97,7 +97,25 @@
     width: 2rem;
     z-index: 120;
   }
+
+  .messageModal {
+    align-items: center;
+    background-color: $off-white;
+    border: 2px solid $red;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 20rem;
+    padding: 2rem;
+    position: fixed;
+    top: calc(50% - 10rem);
+    left: 0;
+    z-index: 200;
+  }
 }
+
+
 
 .hidden {
   display: none;
