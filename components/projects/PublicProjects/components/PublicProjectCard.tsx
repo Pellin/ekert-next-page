@@ -24,7 +24,9 @@ const PublicProjectCard = ({ project, images }: PublicProjectCardProps) => {
   return (
     <Link href={`/projekt/${encodeURIComponent(project.slug)}`}>
       <li
-        style={{ backgroundImage: `url(${featureImage?.url})` }}
+        style={
+          featureImage ? { backgroundImage: `url(${featureImage.url})` } : {}
+        }
         key={project._id}
         className={styles.projectWrapper}
       >

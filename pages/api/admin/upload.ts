@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { getSession } from 'next-auth/react'
 import nc from 'next-connect'
 import fileUpload from 'express-fileupload'
 import { getFileType, uploadFileToS3 } from '../../../aws/helpers'
@@ -25,6 +26,13 @@ const handler = nc<RequestWithFiles, NextApiResponse>({
 })
   .use(fileUpload())
   .post(async (req, res) => {
+    const session = await getSession({ req })
+
+    if (!session) {
+      res.status(401).json({ message: 'Unauthorized' })
+      return
+    }
+
     const { files } = req
 
     const dbFiles = []

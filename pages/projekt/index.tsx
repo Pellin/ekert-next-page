@@ -2,8 +2,8 @@ import React from 'react'
 import { GetStaticProps, NextPage } from 'next'
 import Project from '../../db/models/Project'
 import Image from '../../db/models/Image'
-import { IImage, IProject, MultipleProjectsProps } from '../../globalTypes'
 import PublicProjects from '../../components/projects/PublicProjects'
+import { IImage, IProject, MultipleProjectsProps } from '../../globalTypes'
 
 const ProjectPage: NextPage<MultipleProjectsProps> = ({ projects, images }) => {
   return <PublicProjects projects={projects} images={images} />
@@ -12,8 +12,9 @@ const ProjectPage: NextPage<MultipleProjectsProps> = ({ projects, images }) => {
 export const getStaticProps: GetStaticProps = async () => {
   const projectResponse = await Project.find()
   const projects = JSON.parse(JSON.stringify(projectResponse)) as IProject[]
-  const ImageResponse = await Image.find()
-  const images = JSON.parse(JSON.stringify(ImageResponse)) as IImage[]
+  const imageResponse = await Image.find()
+  const images = JSON.parse(JSON.stringify(imageResponse)) as IImage[]
+
   return {
     props: {
       projects: projects.filter((project) => !project.isProtected),

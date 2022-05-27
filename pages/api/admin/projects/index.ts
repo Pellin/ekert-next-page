@@ -1,12 +1,20 @@
 import { NextApiHandler } from 'next'
+import { getSession } from 'next-auth/react'
+import slug from 'slug'
 import Project from '../../../../db/models/Project'
 import connect from '../../../../db/connect'
-import { generatePassword } from '../../../../utils'
-import slug from 'slug'
-import { IProject } from '../../../../globalTypes'
 import { hashPassword } from '../../../../db/utils'
+import { generatePassword } from '../../../../utils'
+import { IProject } from '../../../../globalTypes'
 
 const handler: NextApiHandler = async (req, res) => {
+  const session = await getSession({ req })
+
+  if (!session) {
+    res.status(401).json({ message: 'Unauthorized' })
+    return
+  }
+
   await connect()
 
   switch (req.method) {

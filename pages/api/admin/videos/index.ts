@@ -1,9 +1,16 @@
 import { NextApiHandler } from 'next'
-import Video from '../../../../db/models/Video'
+import { getSession } from 'next-auth/react'
 import connect from '../../../../db/connect'
-import { s3 } from '../../../../aws/index'
+import Video from '../../../../db/models/Video'
 
 const handler: NextApiHandler = async (req, res) => {
+  const session = await getSession({ req })
+
+  if (!session) {
+    res.status(401).json({ message: 'Unauthorized' })
+    return
+  }
+
   await connect()
 
   switch (req.method) {

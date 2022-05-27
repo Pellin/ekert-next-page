@@ -9,6 +9,7 @@ import {
   FileType,
 } from '../../globalTypes'
 import { AdminContextInterface, EmptyProjectPayload } from './types'
+import { Session } from 'next-auth'
 
 export const AdminContext = React.createContext<AdminContextInterface | null>(
   null
@@ -20,15 +21,14 @@ const AdminContextProvider = (props: FCProps) => {
   const [currentFile, setCurrentFile] = useState<IFile | null>(null)
   const [showLightbox, setShowLightbox] = useState(false)
   const [projects, setProjects] = useState<IProject[]>([])
+  const [session, setSession] = useState<Session | null>(null)
 
   useEffect(() => {
     try {
       API.getProjectsFromDB().then((fetchedProjects) => {
         if (fetchedProjects) setProjects(fetchedProjects)
       })
-    } catch (error) {
-      console.log(error)
-    }
+    } catch (error) {}
   }, [])
 
   useEffect(() => {
@@ -36,9 +36,7 @@ const AdminContextProvider = (props: FCProps) => {
       API.getImagesFromDB().then((fetchedImages) => {
         if (fetchedImages) setImages(fetchedImages)
       })
-    } catch (error) {
-      console.log(error)
-    }
+    } catch (error) {}
   }, [])
 
   useEffect(() => {
@@ -46,9 +44,7 @@ const AdminContextProvider = (props: FCProps) => {
       API.getVideosFromDB().then((fetchedVideos) => {
         if (fetchedVideos) setVideos(fetchedVideos)
       })
-    } catch (error) {
-      console.log(error)
-    }
+    } catch (error) {}
   }, [])
 
   const openLightbox = (file: IFile) => {

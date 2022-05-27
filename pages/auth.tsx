@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import AuthForm from '../../components/admin/Auth/AuthForm'
+import AuthForm from '../components/admin/Auth/AuthForm'
 
 const AuthPage = () => {
   const router = useRouter()
