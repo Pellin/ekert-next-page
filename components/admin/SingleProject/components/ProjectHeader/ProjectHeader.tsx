@@ -54,7 +54,7 @@ const ProjectHeader = ({
 
     router.replace(
       {
-        pathname: `/admin/projects/[slug]`,
+        pathname: `/admin/projekt/[slug]`,
         query: {
           slug: newSlug,
         },

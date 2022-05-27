@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
-    <Link href={`/admin/projects/${project.slug}`}>
+    <Link href={`/admin/projekt/${project.slug}`}>
       <div title={`Gå till ${project.title}`} className={styles.projectCard}>
         <div className={styles.titleAndInfo}>
           <div className={styles.titleAndStatus}>
