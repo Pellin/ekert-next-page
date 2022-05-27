@@ -6,6 +6,8 @@ import AdminContextProvider from '../contexts/admin/AdminContext'
 import '../styles/globals.scss'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  const { session } = pageProps
+
   return (
     <SessionProvider>
       <Head>
@@ -34,7 +36,13 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <meta name="theme-color" content="#f5f5f5" />
       </Head>
       <Layout>
-        <Component {...pageProps} />
+        {session ? (
+          <AdminContextProvider>
+            <Component {...pageProps} />
+          </AdminContextProvider>
+        ) : (
+          <Component {...pageProps} />
+        )}
       </Layout>
     </SessionProvider>
   )

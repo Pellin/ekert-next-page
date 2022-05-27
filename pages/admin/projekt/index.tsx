@@ -1,11 +1,9 @@
 import React from 'react'
-import { GetServerSideProps, NextPage } from 'next'
+import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
-import AdminContent from '../../components/admin/AdminContent'
-import AdminContextProvider from '../../contexts/admin/AdminContext'
 
-const AdminPage: NextPage = () => {
-  return <AdminContent />
+const AllProjectsPage = () => {
+  return <h1>All Projects Page</h1>
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -27,4 +25,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 }
 
-export default AdminPage
+export default AllProjectsPage

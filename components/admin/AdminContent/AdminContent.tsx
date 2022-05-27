@@ -15,22 +15,20 @@ const AdminContent = () => {
   }
 
   return (
-    <AdminContextProvider>
-      <div className={styles.adminContent}>
-        <Button
-          backgroundColor="#F78C79"
-          color="#fff"
-          text="Logga ut"
-          title="Logga ut"
-          onClick={() => handleLogout()}
-        />
-        <UploadSection />
-        <ProjectSection />
-        <ImageSection />
-        <VideoSection />
-        <Lightbox />
-      </div>
-    </AdminContextProvider>
+    <div className={styles.adminContent}>
+      <Button
+        backgroundColor="#F78C79"
+        color="#fff"
+        text="Logga ut"
+        title="Logga ut"
+        onClick={() => handleLogout()}
+      />
+      <UploadSection />
+      <ProjectSection />
+      <ImageSection />
+      <VideoSection />
+      <Lightbox />
+    </div>
   )
 }
 

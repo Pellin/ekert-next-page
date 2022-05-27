@@ -21,7 +21,6 @@ const AdminContextProvider = (props: FCProps) => {
   const [currentFile, setCurrentFile] = useState<IFile | null>(null)
   const [showLightbox, setShowLightbox] = useState(false)
   const [projects, setProjects] = useState<IProject[]>([])
-  const [session, setSession] = useState<Session | null>(null)
 
   useEffect(() => {
     try {
