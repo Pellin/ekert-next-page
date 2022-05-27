@@ -1,0 +1,28 @@
+@import '../../../../styles/variables.scss';
+
+.loginContainer {
+  background-color: $off-white;
+  min-height: 95vh;
+
+  .loginForm {
+    border-radius: 3px;
+    box-shadow: 0 0 4px $shadow;
+    display: flex;
+    flex-direction: column;
+    margin: 25rem auto 0;
+    width: 20rem;
+    padding: 1rem;
+
+    input {
+      background-color: $white;
+      margin-bottom: 1rem;
+      min-width: 100%;
+    }
+
+    button {
+      align-self: center;
+      margin-top: 2rem;
+      max-width: fit-content;
+    }
+  }
+}

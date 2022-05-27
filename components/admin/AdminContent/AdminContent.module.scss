@@ -2,13 +2,20 @@
 
 .adminContent {
   background-color: $off-white;
+  display: flex;
+  flex-direction: column;
   padding: 1rem;
   position: relative;
+
+  button {
+    align-self: flex-end;
+    max-width: fit-content;
+  }
 
   section {
     border-radius: 2px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-    margin-bottom: 2rem;
+    margin-top: 1rem;
     padding: 0 2rem 3rem;
     position: relative;
 

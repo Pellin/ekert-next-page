@@ -1,7 +1,7 @@
 import React from 'react'
 import UploadForm from '../UploadForm'
-import styles from '../../AdminContent/AdminContent.module.scss'
 import Image from 'next/image'
+import styles from '../../AdminContent/AdminContent.module.scss'
 
 const UploadSection = () => {
   return (
