@@ -46,17 +46,17 @@ const handler = nc<RequestWithFiles, NextApiResponse>({
   })
 
 const handleFileUpload = async (file: FileData) => {
-  const success = await uploadFileToS3(file)
+  const uploadedFile = await uploadFileToS3(file)
 
-  if (success) {
+  if (uploadedFile) {
     const fileType = getFileType(file.mimetype)
 
     if (fileType === 'images') {
       const newImage: IImage = new Image({
         title: file.name,
-        url: success.url,
+        url: uploadedFile.url,
         size: file.size,
-        thumbnail: success.thumbnail,
+        thumbnail: uploadedFile.thumbnail,
         public: false,
       })
 
@@ -66,7 +66,7 @@ const handleFileUpload = async (file: FileData) => {
     } else if (fileType === 'videos') {
       const newVideo: IVideo = new Video({
         title: file.name,
-        url: success.url,
+        url: uploadedFile.url,
         size: file.size,
         public: false,
       })

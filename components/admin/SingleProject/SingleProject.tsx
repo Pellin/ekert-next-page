@@ -25,15 +25,32 @@ const SingleProject = ({ project }: { project: IProject }) => {
     setProjectImages(
       images.filter((image) => project.images.includes(image._id!))
     )
-    setUnselectedImages(
-      images.filter((image) => !project.images.includes(image._id!))
-    )
+    if (project.isProtected) {
+      setUnselectedImages(
+        images.filter((image) => !project.images.includes(image._id!))
+      )
+    } else {
+      setUnselectedImages(
+        images.filter(
+          (image) => !project.images.includes(image._id!) && image.public
+        )
+      )
+    }
     setProjectVideos(
       videos.filter((video) => project.videos.includes(video._id!))
     )
-    setUnselectedVideos(
-      videos.filter((video) => !project.videos.includes(video._id!))
-    )
+
+    if (project.isProtected) {
+      setUnselectedVideos(
+        videos.filter((video) => !project.videos.includes(video._id!))
+      )
+    } else {
+      setUnselectedVideos(
+        videos.filter(
+          (video) => !project.videos.includes(video._id!) && video.public
+        )
+      )
+    }
   }, [project, images, videos])
 
   useEffect(() => {
