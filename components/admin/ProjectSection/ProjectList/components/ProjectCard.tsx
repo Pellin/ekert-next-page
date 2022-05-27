@@ -26,8 +26,8 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
                 alt={
                   project.isProtected ? 'Skyddat projekt' : 'Publikt projekt'
                 }
-                height={project.isProtected ? 22 : 16}
-                width={22}
+                height={project.isProtected ? 18 : 12}
+                width={18}
               />
             </div>
           </div>
