@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import ImageList from './ImageList'
 import styles from '../../admin/AdminContent/AdminContent.module.scss'
