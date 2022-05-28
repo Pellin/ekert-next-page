@@ -1,6 +1,6 @@
 import { NextApiHandler } from 'next'
 import connect from '../../../db/connect'
-import User, { userSchema } from '../../../db/models/User'
+import User from '../../../db/models/User'
 import { hashPassword } from '../../../db/utils'
 
 type UserPayload = {
@@ -32,8 +32,6 @@ const handler: NextApiHandler = async (req, res) => {
   user.password = await hashPassword(user.password)
 
   const createdUser = await User.create(user)
-
-  console.log(createdUser)
 
   res.status(201).json({ message: 'User created' })
 }

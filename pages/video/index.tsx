@@ -1,6 +1,7 @@
 import React from 'react'
 import { GetStaticProps } from 'next'
 import { getSignedVideoUrl } from '../../aws/helpers'
+import connect from '../../db/connect'
 import Video from '../../db/models/Video'
 import PublicVideos from '../../components/videos/PublicVideos'
 import { IVideo } from '../../globalTypes'
@@ -10,6 +11,8 @@ const VideoPage = ({ videos }: { videos: IVideo[] }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
+  await connect()
+
   const response = await Video.find()
 
   const videos = JSON.parse(JSON.stringify(response)) as IVideo[]

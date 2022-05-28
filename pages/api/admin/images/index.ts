@@ -1,8 +1,9 @@
 import { NextApiHandler } from 'next'
+import { getSession } from 'next-auth/react'
 import Image from '../../../../db/models/Image'
 import connect from '../../../../db/connect'
-import { removeImageFromS3 } from '../../../../aws/helpers'
-import { getSession } from 'next-auth/react'
+import { removeFileFromS3 } from '../../../../aws/helpers'
+import { FileType } from '../../../../globalTypes'
 
 const handler: NextApiHandler = async (req, res) => {
   const session = await getSession({ req })
@@ -55,7 +56,10 @@ const handler: NextApiHandler = async (req, res) => {
         const removedFromDB = await Image.deleteOne({ title: req.body.title })
 
         if (removedFromDB.acknowledged) {
-          const removedFromS3 = await removeImageFromS3(req.body.title)
+          const removedFromS3 = await removeFileFromS3(
+            req.body.title,
+            FileType.IMAGE
+          )
 
           if (removedFromS3) {
             res.status(200).json({ message: 'Image successfully deleted' })

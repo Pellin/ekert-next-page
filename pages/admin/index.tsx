@@ -2,7 +2,6 @@ import React from 'react'
 import { GetServerSideProps, NextPage } from 'next'
 import { getSession } from 'next-auth/react'
 import AdminContent from '../../components/admin/AdminContent'
-import AdminContextProvider from '../../contexts/admin/AdminContext'
 
 const AdminPage: NextPage = () => {
   return <AdminContent />

@@ -1,5 +1,6 @@
 import React from 'react'
 import { GetStaticProps, NextPage } from 'next'
+import connect from '../../db/connect'
 import Project from '../../db/models/Project'
 import Image from '../../db/models/Image'
 import PublicProjects from '../../components/projects/PublicProjects'
@@ -10,6 +11,8 @@ const ProjectPage: NextPage<MultipleProjectsProps> = ({ projects, images }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
+  await connect()
+
   const projectResponse = await Project.find()
   const projects = JSON.parse(JSON.stringify(projectResponse)) as IProject[]
   const imageResponse = await Image.find()
