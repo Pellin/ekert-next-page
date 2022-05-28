@@ -8,7 +8,6 @@ export interface IImage {
   _id?: string
   title: string
   url: string
-  thumbnail: string
   size: number
   public: boolean
 }
@@ -50,4 +49,8 @@ export enum FileType {
 export type MultipleProjectsProps = {
   projects: IProject[]
   images: IImage[]
+}
+
+export type SingleProjectProps = {
+  project: IProject
 }

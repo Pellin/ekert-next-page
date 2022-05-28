@@ -10,9 +10,6 @@ export const imageSchema = new Schema({
     required: true,
     unique: true,
   },
-  thumbnail: {
-    type: String,
-  },
   size: Number,
   public: Boolean,
 })

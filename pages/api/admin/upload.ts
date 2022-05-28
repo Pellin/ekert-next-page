@@ -57,27 +57,23 @@ const handleFileUpload = async (file: FileData) => {
   const uploadedFile = await uploadFileToS3(file)
 
   if (uploadedFile) {
+    const newFile = {
+      title: file.name,
+      url: uploadedFile.url,
+      size: file.size,
+      public: false,
+    }
+
     const fileType = getFileType(file.mimetype)
 
     if (fileType === 'images') {
-      const newImage: IImage = new Image({
-        title: file.name,
-        url: uploadedFile.url,
-        size: file.size,
-        thumbnail: uploadedFile.thumbnail,
-        public: false,
-      })
+      const newImage: IImage = new Image(newFile)
 
       const uploadedImage = await addImageToDatabase(newImage)
 
       return uploadedImage
     } else if (fileType === 'videos') {
-      const newVideo: IVideo = new Video({
-        title: file.name,
-        url: uploadedFile.url,
-        size: file.size,
-        public: false,
-      })
+      const newVideo: IVideo = new Video(newFile)
 
       const uploadedVideo = await addVideoToDatabase(newVideo)
 

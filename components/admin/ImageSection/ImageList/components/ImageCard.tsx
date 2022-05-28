@@ -32,7 +32,7 @@ const ImageCard = ({ image }: ImageCardProps) => {
         <Image
           layout="responsive"
           className={styles.img}
-          src={image.thumbnail}
+          src={image.url}
           alt={image.title}
           width={200}
           height={200}
