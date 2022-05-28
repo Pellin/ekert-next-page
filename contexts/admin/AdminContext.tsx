@@ -9,6 +9,7 @@ import {
   FileType,
 } from '../../globalTypes'
 import { AdminContextInterface, EmptyProjectPayload } from './types'
+import { getFileType } from '../../aws/helpers'
 
 export const AdminContext = React.createContext<AdminContextInterface | null>(
   null
@@ -220,8 +221,13 @@ const AdminContextProvider = (props: FCProps) => {
 
   const deleteImage = async (title: string): Promise<boolean> => {
     try {
+      const image = images.find((image) => image.title === title)
+      if (!image) return false
+
       await API.deleteImage(title)
       setImages((prev) => [...prev.filter((image) => image.title !== title)])
+
+      await deleteFileFromAssociatedProjects(image)
 
       return true
     } catch (error) {
@@ -231,12 +237,32 @@ const AdminContextProvider = (props: FCProps) => {
 
   const deleteVideo = async (title: string): Promise<boolean> => {
     try {
+      const video = videos.find((video) => video.title === title)
+      if (!video) return false
+
       await API.deleteVideo(title)
       setVideos((prev) => [...prev.filter((video) => video.title !== title)])
+
+      await deleteFileFromAssociatedProjects(video)
 
       return true
     } catch (error) {
       return false
+    }
+  }
+
+  const deleteFileFromAssociatedProjects = async (file: IFile) => {
+    const associatedProjects = projects.filter((project) =>
+      project.images.includes(file._id!)
+    )
+
+    for (const project of associatedProjects) {
+      //@ts-ignore
+      if (file.signedUrl) {
+        await removeFilesFromProject(project._id!, [], [file])
+      } else {
+        await removeFilesFromProject(project._id!, [file], [])
+      }
     }
   }
 

@@ -12,7 +12,7 @@ const ProjectSection = () => {
           <Link href="/projekt/trolljagarna">
             <div className={styles.cardImageWrapper}>
               <Image
-                src="/images/trolljägarna.png"
+                src="/images/trolljagarna.png"
                 alt="Trolljägarna - Robert Achberg"
                 width={'100%'}
                 height={'100%'}
@@ -44,7 +44,7 @@ const ProjectSection = () => {
           <Link href="/projekt/perspektiv-pa-varlden">
             <div className={styles.cardImageWrapper}>
               <Image
-                src="/images/perspektiv-på-världen.jpeg"
+                src="/images/perspektiv-på-varlden.jpeg"
                 alt="Perspektiv på världen"
                 width={'100%'}
                 height={'100%'}

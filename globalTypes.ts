@@ -53,4 +53,6 @@ export type MultipleProjectsProps = {
 
 export type SingleProjectProps = {
   project: IProject
+  images: IImage[]
+  videos: IVideo[]
 }

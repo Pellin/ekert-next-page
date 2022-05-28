@@ -1,12 +1,22 @@
 import React from 'react'
 import { SingleProjectProps } from '../../../globalTypes'
+import PublicImages from '../../images/PublicImages/PublicImages'
+import PublicVideos from '../../videos/PublicVideos'
 import styles from './SingleProject.module.scss'
 
-const PublicProject = ({ project }: SingleProjectProps) => {
+const PublicProject = ({ project, images, videos }: SingleProjectProps) => {
   return (
     <div className={styles.singleProjectContainer}>
-      <h1>{project!.title}</h1>
-      <p>{project!.description}</p>
+      <header
+        className={`${styles.projectHeader} ${
+          !images.length && styles.videoHeader
+        }`}
+      >
+        <h2>{project!.title}</h2>
+        <p>{project!.description}</p>
+      </header>
+      {images.length ? <PublicImages images={images} /> : null}
+      {videos.length ? <PublicVideos videos={videos} /> : null}
     </div>
   )
 }

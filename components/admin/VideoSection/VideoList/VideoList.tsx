@@ -7,11 +7,17 @@ const VideoList = () => {
   const { videos } = useContext(AdminContext)!
 
   return (
-    <ul className={styles.videoList}>
-      {videos.map((video) => (
-        <VideoCard key={video._id} video={video} />
-      ))}
-    </ul>
+    <>
+      {videos.length ? (
+        <ul className={styles.videoList}>
+          {videos.map((video) => (
+            <VideoCard key={video._id} video={video} />
+          ))}
+        </ul>
+      ) : (
+        <p>Det finns inga uppladdade videor</p>
+      )}
+    </>
   )
 }
 

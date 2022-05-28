@@ -9,6 +9,7 @@ const PhotoPage = ({ images }: { images: IImage[] }) => {
   return <PublicImages images={images} />
 }
 
+// maybe use server side props instead (also on video and project pages)
 export const getStaticProps: GetStaticProps = async () => {
   await connect()
 
@@ -19,7 +20,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       images: images.filter((image) => image.public),
     },
-    revalidate: 60 * 60,
+    revalidate: 20,
   }
 }
 

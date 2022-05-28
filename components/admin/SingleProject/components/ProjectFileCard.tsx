@@ -76,7 +76,7 @@ const ProjectFileCard = ({
           className={styles.videoWrapper}
         >
           {/*// @ts-ignore */}
-          <video src={file.signedUrl} />
+          <video src={file.signedUrl} controls />
         </div>
       )}
     </li>

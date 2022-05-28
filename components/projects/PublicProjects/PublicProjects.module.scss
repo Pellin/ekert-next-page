@@ -8,7 +8,9 @@
 
   .projectList {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 50%);
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, 49%);
+    grid-template-rows: 50rem 50rem repeat(auto-fill, 49%);
     list-style: none;
     padding: 0;
     margin: 0;

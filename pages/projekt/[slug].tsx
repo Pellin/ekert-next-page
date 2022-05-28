@@ -1,12 +1,15 @@
 import React from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { getSignedVideoUrl } from '../../aws/helpers'
 import connect from '../../db/connect'
 import Project from '../../db/models/Project'
+import Image from '../../db/models/Image'
 import SingleProject from '../../components/projects/SingleProject'
-import { IProject, SingleProjectProps } from '../../globalTypes'
+import { IImage, IVideo, IProject, SingleProjectProps } from '../../globalTypes'
+import Video from '../../db/models/Video'
 
-const SingleProjectPage = ({ project }: SingleProjectProps) => {
-  return <SingleProject project={project} />
+const SingleProjectPage = ({ project, videos, images }: SingleProjectProps) => {
+  return <SingleProject images={images} videos={videos} project={project} />
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -32,9 +35,26 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   const project = JSON.parse(JSON.stringify(projectResponse)) as IProject
 
+  const imageResponse = await Image.find()
+  const images = JSON.parse(JSON.stringify(imageResponse)) as IImage[]
+  const videoResponse = await Video.find()
+  const videos = JSON.parse(JSON.stringify(videoResponse)) as IVideo[]
+  const filteredVideos = videos.filter((video) =>
+    project.videos.includes(video._id!)
+  )
+
+  for (const video of filteredVideos) {
+    const signedUrl = await getSignedVideoUrl(`test/videos/${video.title}`)
+    if (signedUrl) {
+      video.signedUrl = signedUrl
+    }
+  }
+
   return {
     props: {
       project,
+      images: images.filter((image) => project.images.includes(image._id!)),
+      videos: filteredVideos,
     },
     revalidate: 60 * 60,
   }

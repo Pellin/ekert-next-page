@@ -4,7 +4,7 @@ import { SingleProjectProps } from '../../../globalTypes'
 import ProtectedProjectLogin from './ProtectedProjectLogin'
 import { verifyPassword } from '../../../db/utils'
 
-const ProtectedProject = ({ project }: SingleProjectProps) => {
+const ProtectedProject = ({ project, images, videos }: SingleProjectProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [showError, setShowError] = useState(false)
 
@@ -24,7 +24,7 @@ const ProtectedProject = ({ project }: SingleProjectProps) => {
   return (
     <>
       {isLoggedIn ? (
-        <PublicProject project={project!} />
+        <PublicProject project={project!} images={images} videos={videos} />
       ) : (
         <ProtectedProjectLogin login={handleLogin} showError={showError} />
       )}
