@@ -7,11 +7,17 @@ const ImageList = () => {
   const { images } = useContext(AdminContext)!
 
   return (
-    <ul className={styles.imageGrid}>
-      {images.map((image) => (
-        <ImageCard key={image._id} image={image} />
-      ))}
-    </ul>
+    <>
+      {images.length ? (
+        <ul className={styles.imageGrid}>
+          {images.map((image) => (
+            <ImageCard key={image._id} image={image} />
+          ))}
+        </ul>
+      ) : (
+        <p>Det finns inga uppladdade bilder</p>
+      )}
+    </>
   )
 }
 
