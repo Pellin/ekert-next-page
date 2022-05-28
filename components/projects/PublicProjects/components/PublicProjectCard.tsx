@@ -22,7 +22,7 @@ const PublicProjectCard = ({ project, images }: PublicProjectCardProps) => {
   }, [images, project.images])
 
   return (
-    <Link href={`/projekt/${encodeURIComponent(project.slug)}`}>
+    <Link href={`/projekt/${project.slug}`}>
       <li
         style={
           featureImage ? { backgroundImage: `url(${featureImage.url})` } : {}
@@ -30,10 +30,8 @@ const PublicProjectCard = ({ project, images }: PublicProjectCardProps) => {
         key={project._id}
         className={styles.projectWrapper}
       >
-        <div className={styles.titleAndDescription}>
-          <h2>{project.title}</h2>
-          <p>{project.description}</p>
-        </div>
+        <h3>{project.title.toUpperCase()}</h3>
+
         <div className={styles.gradient}></div>
       </li>
     </Link>
