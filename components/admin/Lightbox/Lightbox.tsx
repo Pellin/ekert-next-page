@@ -35,6 +35,8 @@ const Lightbox = () => {
     showLightbox,
     setShowLightbox,
     toggleFilePublic,
+    deleteImage,
+    deleteVideo,
   } = useContext(AdminContext)!
   const [associatedProjects, setAssociatedProjects] = useState<IProject[]>([])
   const [naturalHeight, setNaturalHeight] = useState(400)
@@ -45,13 +47,15 @@ const Lightbox = () => {
   const [showProtectedMessage, setShowProtectedMessage] = useState(false)
 
   useEffect(() => {
-    setAssociatedProjects(
-      projects.filter(
-        (project) =>
-          project.images.includes(currentFile?._id!) ||
-          project.videos.includes(currentFile?._id!)
+    if (currentFile) {
+      setAssociatedProjects(
+        projects.filter(
+          (project) =>
+            project.images.includes(currentFile._id!) ||
+            project.videos.includes(currentFile._id!)
+        )
       )
-    )
+    }
   }, [projects, currentFile?._id!])
 
   const getDimensions = (e: SyntheticEvent<HTMLImageElement>) => {
@@ -126,6 +130,16 @@ const Lightbox = () => {
     setIsUpdating(false)
   }
 
+  const handleDeleteFile = async () => {
+    if (isImage) {
+      await deleteImage(currentFile.title)
+    } else {
+      await deleteVideo(currentFile.title)
+    }
+
+    setShowLightbox(false)
+  }
+
   const handleShowProtectedMessage = (message: string) => {
     setProtectedMessage(message)
     setShowProtectedMessage(true)
@@ -179,6 +193,18 @@ const Lightbox = () => {
               }
               alt={currentFile.public ? 'Gör privat' : 'Gör offentlig'}
               width={24}
+              height={20}
+            />
+          </div>
+          <div
+            className={styles.deleteIconWrapper}
+            onClick={handleDeleteFile}
+            title="Radera"
+          >
+            <Image
+              src="/icons/trash-icon-white.png"
+              alt={currentFile.public ? 'Gör privat' : 'Gör offentlig'}
+              width={20}
               height={20}
             />
           </div>
