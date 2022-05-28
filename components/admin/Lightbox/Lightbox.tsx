@@ -100,6 +100,23 @@ const Lightbox = () => {
 
         return
       }
+    } else {
+      const publicProjects: string[] = []
+      associatedProjects.forEach((project) => {
+        if (!project.isProtected) {
+          publicProjects.push(project.title)
+        }
+      })
+      if (publicProjects.length) {
+        handleShowProtectedMessage(
+          `Den här filen är tillagd i ${publicProjects.length} ${
+            publicProjects.length === 1 ? 'publikt' : 'publika'
+          } projekt. Du måste ta bort den från följande projekt för att kunna göra den skyddad:
+           ${publicProjects.join(', ')}.`
+        )
+
+        return
+      }
     }
 
     setIsUpdating(true)
@@ -110,8 +127,6 @@ const Lightbox = () => {
   }
 
   const handleShowProtectedMessage = (message: string) => {
-    console.log('running')
-
     setProtectedMessage(message)
     setShowProtectedMessage(true)
   }
