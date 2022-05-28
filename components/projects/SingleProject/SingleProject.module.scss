@@ -1,0 +1,52 @@
+@import '../../../styles/variables.scss';
+
+.singleProjectContainer {
+  background-color: $white;
+  min-height: 95vh;
+  padding: 1rem;
+}
+
+.loginContainer {
+  background-color: $off-white;
+  min-height: 95vh;
+
+  .loginForm {
+    border-radius: 3px;
+    box-shadow: 0 0 4px $shadow;
+    display: flex;
+    flex-direction: column;
+    margin: 25rem auto 0;
+    width: 20rem;
+    padding: 1rem;
+
+    .lockIconWrapper {
+      height: 3rem;
+      margin: 1rem auto;
+      width: 3rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    input {
+      background-color: $white;
+      margin-bottom: 1rem;
+      min-width: 100%;
+    }
+
+    .error {
+      p {
+        color: $red;
+      }
+    }
+
+    button {
+      align-self: center;
+      margin-top: 2rem;
+      max-width: fit-content;
+    }
+  }
+}
