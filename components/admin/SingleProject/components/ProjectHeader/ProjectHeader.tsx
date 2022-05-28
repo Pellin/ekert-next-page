@@ -16,7 +16,7 @@ const ProjectHeader = ({
   setSelectedToRemove,
 }: ProjectHeaderProps) => {
   const router = useRouter()
-  const { updateProjectTitle, updateProjectDescription } =
+  const { updateProjectTitle, updateProjectDescription, deleteProject } =
     useContext(AdminContext)!
   const [title, setTitle] = useState(project.title)
   const [description, setDescription] = useState(project.description)
@@ -79,6 +79,12 @@ const ProjectHeader = ({
     await updateProjectDescription(project._id!, description)
     setEditDescriptionMode(false)
     setIsUpdating(false)
+  }
+
+  const handleDeleteProject = async () => {
+    await deleteProject(project._id!)
+
+    router.replace('/admin')
   }
 
   return (
@@ -210,7 +216,11 @@ const ProjectHeader = ({
               layout="responsive"
             />
           </li>
-          <li title="Radera projekt" className={styles.actionMenuItem}>
+          <li
+            title="Radera projekt"
+            className={styles.actionMenuItem}
+            onClick={handleDeleteProject}
+          >
             <Image
               src="/icons/trash-icon.png"
               alt="Radera projekt"

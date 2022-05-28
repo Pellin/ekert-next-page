@@ -9,7 +9,6 @@ import {
   FileType,
 } from '../../globalTypes'
 import { AdminContextInterface, EmptyProjectPayload } from './types'
-import { Session } from 'next-auth'
 
 export const AdminContext = React.createContext<AdminContextInterface | null>(
   null
@@ -188,6 +187,18 @@ const AdminContextProvider = (props: FCProps) => {
     return success
   }
 
+  const deleteProject = async (projectId: string) => {
+    const response = await API.deleteProject(projectId)
+
+    if (response.deleted) {
+      setProjects((prev) => [
+        ...prev.filter((project) => project._id !== projectId),
+      ])
+    }
+
+    return response.success as boolean
+  }
+
   const toggleFilePublic = async (file: IFile) => {
     if (file.public) {
       file.public = false
@@ -218,6 +229,17 @@ const AdminContextProvider = (props: FCProps) => {
     }
   }
 
+  const deleteVideo = async (title: string): Promise<boolean> => {
+    try {
+      await API.deleteVideo(title)
+      setVideos((prev) => [...prev.filter((video) => video.title !== title)])
+
+      return true
+    } catch (error) {
+      return false
+    }
+  }
+
   const refreshVideoUrl = async (title: string) => {
     const url = await API.getSignedVideoUrl(title)
 
@@ -234,8 +256,10 @@ const AdminContextProvider = (props: FCProps) => {
     updateProjectDescription,
     addFilesToProject,
     removeFilesFromProject,
+    deleteProject,
     toggleFilePublic,
     deleteImage,
+    deleteVideo,
     setImages,
     setVideos,
     refreshVideoUrl,

@@ -75,6 +75,14 @@ const handler: NextApiHandler = async (req, res) => {
         res.status(500).json({ error })
       }
       break
+    case 'DELETE':
+      try {
+        const response = await Project.remove({ _id: req.body.projectId })
+
+        res.status(200).json({ deleted: response.acknowledged })
+      } catch (error) {
+        res.status(500).json({ error })
+      }
   }
 }
 

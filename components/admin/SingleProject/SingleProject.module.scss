@@ -2,6 +2,7 @@
 
 .projectContainer {
   padding: 1rem;
+  position: relative;
   width: 100%;
 
   .disabled {
@@ -274,5 +275,36 @@
     }
    
 
+  }
+
+  .confirmDeleteModal {
+    align-items: center;
+    background-color: $off-black;
+    display: flex;
+    flex: 1;
+    height: 100%;
+    justify-content: center;
+    margin: 0;
+    opacity: 1;
+    padding: 2rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+
+    .messageBox {
+      background-color: #e9e9e9;
+      max-height: 25rem;
+      width: 30rem;
+      z-index: 50;
+
+      .buttons {
+        max-height: fit-content;
+        display: flex;
+      }
+    }
   }
 }

@@ -49,6 +49,16 @@ export const updateProjectInDB = async (
   return response.data.acknowledged as boolean
 }
 
+export const deleteProject = async (projectId: string) => {
+  const response = await axios.delete('/api/admin/projects', {
+    data: {
+      projectId,
+    },
+  })
+
+  return response.data
+}
+
 export const uploadFiles = async (data: FormData) => {
   const response: AxiosResponse<any> = await axios.post(
     '/api/admin/upload',
@@ -77,6 +87,16 @@ export const getImagesFromDB = async () => {
 
 export const deleteImage = async (title: string) => {
   const response = await axios.delete('/api/admin/images', {
+    data: {
+      title,
+    },
+  })
+
+  return response.data
+}
+
+export const deleteVideo = async (title: string) => {
+  const response = await axios.delete('/api/admin/videos', {
     data: {
       title,
     },

@@ -40,6 +40,8 @@ export type ProjectHeaderProps = {
   project: IProject
   showAddContent: boolean
   setShowAddContent: React.Dispatch<React.SetStateAction<boolean>>
+  showDeleteModal: boolean
+  setShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>
   showRemoveContent: boolean
   setShowRemoveContent: React.Dispatch<React.SetStateAction<boolean>>
   setSelectedToAdd: React.Dispatch<React.SetStateAction<string[]>>

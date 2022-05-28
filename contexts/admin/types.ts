@@ -29,8 +29,10 @@ export interface AdminContextInterface {
     projectId: string,
     newDescription: string
   ) => Promise<boolean>
+  deleteProject: (projectId: string) => Promise<boolean>
   toggleFilePublic: (file: IFile) => Promise<void>
   deleteImage: (title: string) => Promise<boolean>
+  deleteVideo: (title: string) => Promise<boolean>
   setImages: React.Dispatch<React.SetStateAction<IImage[]>>
   setVideos: React.Dispatch<React.SetStateAction<IVideo[]>>
   refreshVideoUrl: (title: string) => Promise<string>

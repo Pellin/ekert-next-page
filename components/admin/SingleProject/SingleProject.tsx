@@ -6,6 +6,21 @@ import AddContent from './components/AddContent'
 import ProjectContent from './components/ProjectContent'
 import { IImage, IProject, IVideo } from '../../../globalTypes'
 import styles from './SingleProject.module.scss'
+import Button from '../../ui/Button'
+
+const ConfirmDeleteModal = () => {
+  return (
+    <dialog className={styles.confirmDeleteModal}>
+      <div className={styles.messageBox}>
+        <p>Är du säker?</p>
+        <div className={styles.buttons}>
+          <Button text="Avbryt" title="Avbryt" />
+          <Button text="Ja" title="Avbryt" />
+        </div>
+      </div>
+    </dialog>
+  )
+}
 
 const SingleProject = ({ project }: { project: IProject }) => {
   const { images, videos, addFilesToProject } = useContext(AdminContext)!
@@ -20,6 +35,7 @@ const SingleProject = ({ project }: { project: IProject }) => {
   )
   const [unselectedImages, setUnselectedImages] = useState<IImage[]>([])
   const [unselectedVideos, setUnselectedVideos] = useState<IVideo[]>([])
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
 
   useEffect(() => {
     setProjectImages(
@@ -90,6 +106,8 @@ const SingleProject = ({ project }: { project: IProject }) => {
         setShowRemoveContent={setShowRemoveContent}
         setSelectedToAdd={setSelectedToAdd}
         setSelectedToRemove={setSelectedToRemove}
+        setShowDeleteModal={setShowDeleteModal}
+        showDeleteModal={showDeleteModal}
       />
       {showAddContent && (
         <AddContent
@@ -116,6 +134,7 @@ const SingleProject = ({ project }: { project: IProject }) => {
         selectedFiles={selectedToRemove}
         setSelectedFiles={setSelectedToRemove}
       />
+      {showDeleteModal && <ConfirmDeleteModal />}
     </div>
   )
 }
