@@ -18,7 +18,9 @@ const Footer = () => {
       <address className={styles.adressBox}>
         <h3>Anders Ekert Produktion AB</h3>
         <p>Sandfjärdsgatan 84, 120 56 Årsta</p>
-        <p className={styles.phone}>+46 708 761 101</p>
+        <a href="tel:+46708761101" className={styles.phone}>
+          +46 708 761 101
+        </a>
         <a href="mailto:anders.ekert@gmail.com">anders.ekert@gmail.com</a>
         <p
           className={styles.copyright}

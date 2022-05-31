@@ -4,9 +4,11 @@
   align-items: center;
   background-color: $off-black;
   display: flex;
-  justify-content: space-around;
-  margin-top: auto;
+  justify-content: space-between;
+  margin: auto;
+  max-width: 1200px;
   min-height: 24rem;
+  padding: 0 5rem;
 
   .logoWrapper {
     height: 24rem;
@@ -38,6 +40,7 @@
     }
 
     .phone {
+      cursor: pointer;
       font-size: 2.4rem;
     }
 
