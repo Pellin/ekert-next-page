@@ -10,12 +10,11 @@ class MyDocument extends Document {
           <link
             href="https://fonts.googleapis.com/css2?family=Outfit:wght@300&family=Roboto:wght@400;700&display=swap"
             rel="stylesheet"
-          ></link>
+          />
         </Head>
         <body>
           <Main />
           <NextScript />
-          <div id="notifications"></div>
         </body>
       </Html>
     )
