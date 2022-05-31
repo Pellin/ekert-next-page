@@ -25,7 +25,7 @@ const Lightbox = () => {
   const [showProtectedMessage, setShowProtectedMessage] = useState(false)
 
   useEffect(() => {
-    if (currentFile) {
+    if (currentFile && projects) {
       setAssociatedProjects(
         projects.filter(
           (project) =>
@@ -34,7 +34,7 @@ const Lightbox = () => {
         )
       )
     }
-  }, [projects, currentFile?._id!])
+  }, [projects, currentFile])
 
   const getDimensions = (e: SyntheticEvent<HTMLImageElement>) => {
     setIsLandscape(e.currentTarget.naturalWidth > e.currentTarget.naturalHeight)
