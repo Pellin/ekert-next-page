@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import Button from '../../ui/Button'
 import styles from './ProjectSection.module.scss'
 
 const ProjectSection = () => {
@@ -57,6 +58,13 @@ const ProjectSection = () => {
           <h3>PERSPEKTIV PÅ VÄRLDEN</h3>
         </li>
       </ul>
+      <div className={styles.allProjectsLink}>
+        <Link passHref href="/projekt">
+          <a>
+            <Button text="Se alla projekt" title="Gå till projektsidan" />
+          </a>
+        </Link>
+      </div>
     </section>
   )
 }
