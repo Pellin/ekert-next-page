@@ -1,9 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
-import styles from './MainContent.module.scss'
 import Section from './components/Section'
 import ClientSection from '../ClientSection'
 import ProjectSection from '../ProjectSection'
+import styles from './MainContent.module.scss'
 
 const MainContent = () => {
   return (
@@ -17,10 +17,10 @@ const MainContent = () => {
         <div className={styles.imageWrapper}>
           <Image
             priority
-            src="/images/ae-selfie.jpg"
-            alt="Anders Ekert"
-            width={200}
-            height={200}
+            src="/images/bangkok.jpg"
+            alt="Butiksägare i Bangkok"
+            width={800}
+            height={500}
             layout="responsive"
             onContextMenu={(e) => e.preventDefault()}
           />
@@ -28,6 +28,17 @@ const MainContent = () => {
       </Section>
       <ClientSection />
       <ProjectSection />
+      <div className={styles.imageWrapper}>
+        <Image
+          priority
+          src="/images/ae-selfie.jpg"
+          alt="Anders Ekert"
+          width={800}
+          height={800}
+          layout="responsive"
+          onContextMenu={(e) => e.preventDefault()}
+        />
+      </div>
     </div>
   )
 }
