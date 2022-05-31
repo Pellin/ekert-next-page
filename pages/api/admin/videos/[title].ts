@@ -14,7 +14,12 @@ const handler: NextApiHandler = async (req, res) => {
     case 'GET':
       try {
         const title = req.query.title as string
-        const url = await getSignedVideoUrl(`test/videos/${title}`)
+        let key = `videos/${title}`
+
+        if (process.env.NODE_ENV === 'development') {
+          key = `test/${key}`
+        }
+        const url = await getSignedVideoUrl(key)
 
         res.status(200).json(url)
       } catch (error) {
